@@ -89,6 +89,10 @@ Open a pull request for meaningful work. Its description should include:
 Use `Closes #<issue>` only when merging the pull request should complete that
 issue. Review the final PR diff and required CI checks before merging.
 
+GitHub Actions runs the same frozen install, typecheck, test, and build steps
+for pull requests and pushes to `main`. The required check is named
+`Verify source`.
+
 ## Handoff
 
 At the end of a task, report:
@@ -101,4 +105,3 @@ At the end of a task, report:
 
 Do not describe local work as pushed, a branch as merged, or a build as
 deployed without checking that exact state.
-

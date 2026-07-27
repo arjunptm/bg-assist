@@ -1,5 +1,9 @@
 # BG Assistant
 
+[![CI](https://github.com/arjunptm/bg-assist/actions/workflows/ci.yml/badge.svg)](https://github.com/arjunptm/bg-assist/actions/workflows/ci.yml)
+![Node.js 22+](https://img.shields.io/badge/Node.js-22%2B-43853d)
+![PWA](https://img.shields.io/badge/PWA-installable-173f35)
+
 BG Assistant is a mobile-first PWA for getting a board-game session started
 quickly. Groups share a configurable game library through an unguessable link,
 while player names and assignment results remain private on each device.
@@ -67,10 +71,17 @@ change-specific verification, commit guidance, and pull-request process.
 - `PRODUCT_SPEC.md` - authoritative v1 product requirements
 - `conversation-handoff.md` - earlier planning and infrastructure discussion
 
+## Documentation
+
+- [Product specification](PRODUCT_SPEC.md)
+- [Architecture](docs/architecture.md)
+- [Development workflow](docs/development.md)
+- [Roadmap](docs/roadmap.md)
+- [Changelog](CHANGELOG.md)
+
 ## Deployment status
 
 The source is tracked at `github.com/arjunptm/bg-assist`. No Cloudflare
 production resource, custom domain, or DNS change has been created.
 `wrangler.jsonc` intentionally contains a placeholder D1 database ID.
 Cloudflare setup will be completed later as a separate, guided step.
-

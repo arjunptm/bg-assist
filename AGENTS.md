@@ -4,8 +4,13 @@
 
 - `PRODUCT_SPEC.md` is the authoritative v1 product specification.
 - `README.md` documents current capabilities and local commands.
+- `docs/architecture.md` documents state ownership and system boundaries.
 - `docs/development.md` defines the repository's branch, review, verification,
   and pull-request workflow.
+- `docs/roadmap.md` summarizes implementation sequencing; `PRODUCT_SPEC.md`
+  remains authoritative when they differ.
+- `CHANGELOG.md` records notable completed work under `Unreleased` until the
+  first production release.
 - `conversation-handoff.md` preserves the earlier planning discussion.
 - `migrations/` is the authoritative D1 schema history.
 
@@ -17,6 +22,8 @@
 - Package manager: pnpm 11; runtime: Node.js 22 or newer.
 - Start: `pnpm run db:local`, then `pnpm run dev`.
 - Verify: `pnpm run typecheck`, `pnpm test`, `pnpm run build`.
+- GitHub Actions runs the same checks from `.github/workflows/ci.yml` for pull
+  requests and pushes to `main`.
 - The Codex runtime on this PC does not place Node on PATH. During the initial
   build, its bundled `node.exe` was copied into ignored `node_modules/.bin`.
   This is an environment workaround, not a project dependency.
@@ -46,8 +53,9 @@
 ## Git, deployment, and secrets
 
 - Keep changes within `BG Assistant` unless explicitly asked otherwise.
-- Follow the workspace-level `REPOSITORY_STANDARDS.md`; this section and
-  `docs/development.md` specialize it for BG Assistant.
+- When this repository is used inside `W:\Codex Projects`, also follow the
+  workspace-level `REPOSITORY_STANDARDS.md`. This file and
+  `docs/development.md` remain self-contained for standalone clones.
 - The repository uses `main`, with `origin` pointing to
   `git@github.com:arjunptm/bg-assist.git`.
 - Check related GitHub issues before meaningful work. Use an existing issue
