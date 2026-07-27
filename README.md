@@ -69,7 +69,6 @@ change-specific verification, commit guidance, and pull-request process.
 - `migrations/` - versioned D1 schema
 - `test/` - privacy, capability, validation, and randomizer tests
 - `PRODUCT_SPEC.md` - authoritative v1 product requirements
-- `conversation-handoff.md` - earlier planning and infrastructure discussion
 
 ## Documentation
 

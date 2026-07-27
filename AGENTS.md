@@ -11,7 +11,6 @@
   remains authoritative when they differ.
 - `CHANGELOG.md` records notable completed work under `Unreleased` until the
   first production release.
-- `conversation-handoff.md` preserves the earlier planning discussion.
 - `migrations/` is the authoritative D1 schema history.
 
 ## Stack and commands
