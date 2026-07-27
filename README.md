@@ -51,19 +51,26 @@ pnpm run build
 The production build is written to `dist/`. Local Cloudflare state is written
 to `.wrangler/`; both are ignored by Git.
 
+## Development workflow
+
+Meaningful changes use an issue-first, branch-and-pull-request workflow. Codex
+branches use the `AI-<short-description>` naming convention. See
+[docs/development.md](docs/development.md) for the local review checklist,
+change-specific verification, commit guidance, and pull-request process.
+
 ## Project map
 
-- `src/` — React PWA, device storage, randomizer, and shared contracts
-- `worker/` — capability-scoped Hono API and D1 access
-- `migrations/` — versioned D1 schema
-- `test/` — privacy, capability, validation, and randomizer tests
-- `PRODUCT_SPEC.md` — authoritative v1 product requirements
-- `conversation-handoff.md` — earlier planning and infrastructure discussion
+- `src/` - React PWA, device storage, randomizer, and shared contracts
+- `worker/` - capability-scoped Hono API and D1 access
+- `migrations/` - versioned D1 schema
+- `test/` - privacy, capability, validation, and randomizer tests
+- `PRODUCT_SPEC.md` - authoritative v1 product requirements
+- `conversation-handoff.md` - earlier planning and infrastructure discussion
 
 ## Deployment status
 
-No Git remote, GitHub repository, Cloudflare production resource, custom
-domain, or DNS change has been created. `wrangler.jsonc` intentionally contains
-a placeholder D1 database ID. GitHub/Cloudflare setup will be completed later
-as a separate, guided step.
+The source is tracked at `github.com/arjunptm/bg-assist`. No Cloudflare
+production resource, custom domain, or DNS change has been created.
+`wrangler.jsonc` intentionally contains a placeholder D1 database ID.
+Cloudflare setup will be completed later as a separate, guided step.
 
