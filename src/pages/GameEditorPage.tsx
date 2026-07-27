@@ -16,6 +16,14 @@ function freshSet(): AssignmentSet {
   };
 }
 
+function moveItem<T>(items: T[], from: number, to: number): T[] {
+  if (to < 0 || to >= items.length) return items;
+  const next = [...items];
+  const [item] = next.splice(from, 1);
+  next.splice(to, 0, item!);
+  return next;
+}
+
 export function GameEditorPage() {
   const { capability = "", gameId } = useParams();
   const navigate = useNavigate();
@@ -91,9 +99,13 @@ export function GameEditorPage() {
                 <span>Set name</span>
                 <input required maxLength={60} value={set.name} onChange={(event) => updateSet(setIndex, { name: event.target.value })} placeholder="Factions" />
               </label>
-              {draft.assignmentSets.length > 1 && (
-                <button type="button" className="text-button danger" onClick={() => setDraft({ ...draft, assignmentSets: draft.assignmentSets.filter((_, index) => index !== setIndex), bannedCombinations: [] })}>Remove set</button>
-              )}
+              <div className="reorder-actions">
+                <button type="button" className="icon-button" disabled={setIndex === 0} aria-label={`Move ${set.name || "set"} up`} onClick={() => setDraft({ ...draft, assignmentSets: moveItem(draft.assignmentSets, setIndex, setIndex - 1) })}>↑</button>
+                <button type="button" className="icon-button" disabled={setIndex === draft.assignmentSets.length - 1} aria-label={`Move ${set.name || "set"} down`} onClick={() => setDraft({ ...draft, assignmentSets: moveItem(draft.assignmentSets, setIndex, setIndex + 1) })}>↓</button>
+                {draft.assignmentSets.length > 1 && (
+                  <button type="button" className="text-button danger" onClick={() => setDraft({ ...draft, assignmentSets: draft.assignmentSets.filter((_, index) => index !== setIndex), bannedCombinations: [] })}>Remove</button>
+                )}
+              </div>
             </div>
             <div className="option-list">
               {set.options.map((option, optionIndex) => (
@@ -106,7 +118,11 @@ export function GameEditorPage() {
                     <span>Qty</span>
                     <input type="number" min="1" max="99" value={option.quantity} onChange={(event) => updateSet(setIndex, { options: set.options.map((item, index) => index === optionIndex ? { ...item, quantity: Number(event.target.value) } : item) })} />
                   </label>
-                  <button type="button" className="icon-button danger" aria-label={`Remove ${option.name || "option"}`} onClick={() => updateSet(setIndex, { options: set.options.filter((_, index) => index !== optionIndex) })}>×</button>
+                  <div className="option-actions">
+                    <button type="button" className="mini-button" disabled={optionIndex === 0} aria-label={`Move ${option.name || "option"} up`} onClick={() => updateSet(setIndex, { options: moveItem(set.options, optionIndex, optionIndex - 1) })}>↑</button>
+                    <button type="button" className="mini-button" disabled={optionIndex === set.options.length - 1} aria-label={`Move ${option.name || "option"} down`} onClick={() => updateSet(setIndex, { options: moveItem(set.options, optionIndex, optionIndex + 1) })}>↓</button>
+                    <button type="button" className="mini-button danger" aria-label={`Remove ${option.name || "option"}`} onClick={() => updateSet(setIndex, { options: set.options.filter((_, index) => index !== optionIndex) })}>×</button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -176,4 +192,3 @@ function RestrictionsEditor({ draft, onChange }: { draft: GameDraft; onChange: (
     </section>
   );
 }
-

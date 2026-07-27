@@ -225,8 +225,21 @@ input:focus, select:focus { border-color: var(--forest); box-shadow: 0 0 0 3px r
 .form-section, .set-editor { margin-bottom: 1rem; padding: 1.1rem; }
 .set-editor__heading { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: .8rem; }
 .option-list { display: grid; gap: .6rem; margin: 1rem 0; }
-.option-row { display: grid; grid-template-columns: 1fr 74px 40px; align-items: end; gap: .5rem; }
+.option-row { display: grid; grid-template-columns: 1fr 74px auto; align-items: end; gap: .5rem; }
 .quantity input { text-align: center; }
+.reorder-actions, .option-actions { display: flex; align-items: center; }
+.mini-button {
+  width: 31px;
+  height: 31px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  font-weight: 700;
+}
+.mini-button:hover:not(:disabled), .icon-button:hover:not(:disabled) { background: rgb(23 63 53 / 8%); }
+.mini-button:disabled, .icon-button:disabled { cursor: not-allowed; opacity: .3; }
 .restriction { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding: .55rem 0; }
 .restriction-builder { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1rem; }
 .restriction-plus { display: none; }
