@@ -17,6 +17,9 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Expanded automated privacy and persistence coverage across IndexedDB,
+  cached offline fallback, create/join/editor/setup flows, and Miniflare-backed
+  Worker/D1 integration.
 - Added optional curated colors for assignment options across editing, setup,
   assignment results, cached snapshots, and shared persistence.
 - Added public How it works and Privacy sections with a plain-language
