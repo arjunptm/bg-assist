@@ -81,6 +81,64 @@ describe("local assignment randomizer", () => {
     ).toThrowError(expect.objectContaining<Partial<RandomizerError>>({ code: "NO_VALID_ASSIGNMENT" }));
   });
 
+  it("respects temporary player exclusions", () => {
+    const result = assignSet({
+      playerIds: ["Arjun"],
+      options: [
+        { id: "red", name: "Red", quantity: 1 },
+        { id: "blue", name: "Blue", quantity: 1 }
+      ],
+      enabledOptionIds: new Set(["red", "blue"]),
+      fixedAssignments: {},
+      bannedCombinations: [],
+      playerExclusions: { Arjun: new Set(["red"]) }
+    });
+
+    expect(result.Arjun).toBe("blue");
+  });
+
+  it("reports when temporary exclusions make a set unsatisfiable", () => {
+    expect(() =>
+      assignSet({
+        playerIds: ["Arjun"],
+        options: [{ id: "red", name: "Red", quantity: 1 }],
+        enabledOptionIds: new Set(["red"]),
+        fixedAssignments: {},
+        bannedCombinations: [],
+        playerExclusions: { Arjun: new Set(["red"]) }
+      })
+    ).toThrowError(expect.objectContaining<Partial<RandomizerError>>({ code: "NO_VALID_ASSIGNMENT" }));
+  });
+
+  it("returns a different valid assignment when reshuffling", () => {
+    const result = assignSet({
+      playerIds: ["Arjun", "Ben"],
+      options: [
+        { id: "red", name: "Red", quantity: 1 },
+        { id: "blue", name: "Blue", quantity: 1 }
+      ],
+      enabledOptionIds: new Set(["red", "blue"]),
+      fixedAssignments: {},
+      bannedCombinations: [],
+      avoidAssignment: { Arjun: "red", Ben: "blue" }
+    });
+
+    expect(result).toEqual({ Arjun: "blue", Ben: "red" });
+  });
+
+  it("reports when fixed constraints leave no different reshuffle", () => {
+    expect(() =>
+      assignSet({
+        playerIds: ["Arjun"],
+        options: [{ id: "red", name: "Red", quantity: 1 }],
+        enabledOptionIds: new Set(["red"]),
+        fixedAssignments: {},
+        bannedCombinations: [],
+        avoidAssignment: { Arjun: "red" }
+      })
+    ).toThrowError(expect.objectContaining<Partial<RandomizerError>>({ code: "NO_ALTERNATIVE_ASSIGNMENT" }));
+  });
+
   it("enforces the exact-solver player limit", () => {
     const thirteen = Array.from({ length: 13 }, (_, index) => `Player ${index}`);
     expect(() =>

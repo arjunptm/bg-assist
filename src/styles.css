@@ -295,6 +295,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
 .restriction-plus { display: none; }
 .sticky-actions { position: sticky; bottom: 0; padding: 1rem 0 max(1rem, env(safe-area-inset-bottom)); background: linear-gradient(transparent, var(--cream) 20%); }
 .player-grid { display: flex; flex-wrap: wrap; gap: .6rem; }
+.roster-filter { max-width: 480px; margin-bottom: .8rem; }
+.roster-empty { margin: .7rem 0 0; }
 .player-chip {
   display: inline-flex;
   min-height: 49px;
@@ -321,7 +323,21 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 .option-toggle.is-enabled { border-color: #9eb5a7; background: var(--forest-light); }
 .option-toggle span { margin-right: .35rem; }
 .option-toggle small { flex-basis: 100%; margin: .3rem 0 0 1.45rem; color: var(--muted); font-weight: 400; line-height: 1.4; }
+.exclusion-panel .hint { margin: .7rem 0; }
+.exclusion-list { display: grid; gap: .65rem; }
+.exclusion-player { min-width: 0; margin: 0; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
+.exclusion-player legend { padding: 0 .3rem; font-weight: 700; }
+.exclusion-options { display: flex; flex-wrap: wrap; gap: .4rem; }
+.exclusion-toggle {
+  display: inline-flex; min-height: 40px; align-items: center; gap: .4rem; border: 1px solid var(--line);
+  border-radius: 10px; padding: .45rem .6rem; background: transparent; cursor: pointer; font-weight: 700;
+}
+.exclusion-toggle.is-excluded { border-color: var(--danger); background: var(--forest-light); }
+.exclusion-toggle span { color: var(--danger); font-size: 1.05rem; }
+.setup-feedback { padding: 1rem; color: var(--ink); background: var(--forest-light); box-shadow: none; }
 .assignments { border-top: 2px solid var(--ink); margin-top: 2rem; }
+.assignments__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.assignments__heading h2, .assignments__heading .eyebrow { margin-bottom: 0; }
 .assignment-card { border-radius: 18px; padding: 1rem; color: white; background: var(--forest); }
 .assignment-card h3 { font-family: Georgia, serif; font-size: 1.45rem; }
 .assignment-card dl, .assignment-card dd { margin: 0; }
