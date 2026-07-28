@@ -25,6 +25,10 @@ button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
 a { color: var(--forest); }
+:where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 3px;
+}
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { line-height: 1.08; }
 h1, h2 { font-family: Georgia, "Times New Roman", serif; }
@@ -128,6 +132,7 @@ h3 { margin-bottom: .35rem; }
 .button--small { min-height: 40px; border-radius: 12px; padding: .55rem .8rem; font-size: .88rem; }
 .button--full { width: 100%; }
 .text-button, .icon-button, .modal__close, .game-card__actions button {
+  min-height: 40px;
   border: 0;
   padding: .4rem;
   cursor: pointer;
@@ -231,7 +236,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
 .game-card__main { border: 0; border-radius: 0; padding: 1.15rem; }
 .game-card__number { color: var(--coral); font-family: Georgia, serif; font-size: 1.2rem; }
 .game-card__actions { display: flex; justify-content: flex-end; gap: .8rem; border-top: 1px solid var(--line); padding: .45rem .8rem; }
-.game-card__actions a { padding: .4rem; font-weight: 700; text-decoration: none; }
+.game-card__actions a { display: inline-flex; min-height: 40px; align-items: center; padding: .4rem; font-weight: 700; text-decoration: none; }
 .accent-1 .game-card__number { color: var(--blue); }
 .accent-2 .game-card__number { color: var(--gold); }
 .accent-3 .game-card__number { color: #8a69a1; }
@@ -264,7 +269,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
   background: rgb(12 25 20 / 65%);
 }
 .modal { position: relative; width: min(100%, 390px); padding: 1.4rem; text-align: center; }
-.modal__close { position: absolute; top: .6rem; right: .6rem; font-size: 1.5rem; }
+.modal__close { position: absolute; top: .6rem; right: .6rem; min-width: 40px; border-radius: 10px; font-size: 1.5rem; }
 .qr { display: block; width: min(100%, 290px); margin: 1rem auto; border-radius: 14px; }
 .share-link { margin: .9rem 0; text-align: left; }
 .share-link input { width: 100%; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .78rem; }
@@ -304,8 +309,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
 .quantity input { text-align: center; }
 .reorder-actions, .option-actions { display: flex; align-items: center; }
 .mini-button {
-  width: 31px;
-  height: 31px;
+  width: 40px;
+  height: 40px;
   border: 0;
   border-radius: 8px;
   padding: 0;
@@ -365,13 +370,13 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 .assignments { border-top: 2px solid var(--ink); margin-top: 2rem; }
 .assignments__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
 .assignments__heading h2, .assignments__heading .eyebrow { margin-bottom: 0; }
-.start-over-confirmation {
+.inline-confirmation {
   display: grid; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: var(--forest-light); box-shadow: none;
 }
-.start-over-confirmation h3, .start-over-confirmation p { margin-bottom: 0; }
-.start-over-confirmation p { color: var(--muted); line-height: 1.5; }
-.start-over-confirmation__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
-.start-over-confirmation__actions .danger { border-color: var(--danger); }
+.inline-confirmation h3, .inline-confirmation p { margin-bottom: 0; }
+.inline-confirmation p { color: var(--muted); line-height: 1.5; }
+.inline-confirmation__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
+.inline-confirmation__actions .danger { border-color: var(--danger); }
 .assignment-card { border-radius: 18px; padding: 1rem; color: white; background: var(--forest); }
 .assignment-card h3 { font-family: Georgia, serif; font-size: 1.45rem; }
 .assignment-card dl, .assignment-card dd { margin: 0; }
@@ -391,7 +396,7 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
   .privacy-callout { grid-template-columns: 1fr 1fr; align-items: center; padding: 1.4rem; }
   .restriction-builder { grid-template-columns: 1fr 1.5fr auto 1fr 1.5fr; align-items: center; }
   .restriction-builder .button { grid-column: 1 / -1; }
-  .start-over-confirmation { grid-template-columns: 1fr auto; align-items: center; }
+  .inline-confirmation { grid-template-columns: 1fr auto; align-items: center; }
   .restriction-plus { display: inline; text-align: center; font-weight: 700; }
 }
 
