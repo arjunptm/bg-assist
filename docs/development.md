@@ -93,6 +93,11 @@ GitHub Actions runs the same frozen install, typecheck, test, and build steps
 for pull requests and pushes to `main`. The required check is named
 `Verify source`.
 
+Persistence and Worker integration tests use `fake-indexeddb` for browser-local
+state and Miniflare with an isolated D1 database for the real Hono/D1 boundary.
+The integration harness applies every checked-in migration before exercising
+capability access, strict payload validation, revisions, deletion, and restore.
+
 ### Interrupted Windows test runs
 
 Vitest uses one worker thread for this repository. This avoids the separate

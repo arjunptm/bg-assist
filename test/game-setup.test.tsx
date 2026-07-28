@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { GameSetupPage } from "../src/pages/GameSetupPage";
+import { setRoster } from "../src/lib/storage";
 
 afterEach(() => {
   cleanup();
@@ -161,5 +162,19 @@ describe("local setup controls", () => {
     fireEvent.click(playerButton);
     fireEvent.click(playerButton);
     expect(screen.getByRole("button", { name: "Arjun: avoid Dr. Copper" }).getAttribute("aria-pressed")).toBe("false");
+  });
+
+  it("clears only the current group's locally remembered players after confirmation", async () => {
+    vi.spyOn(window, "confirm").mockReturnValueOnce(true);
+    renderSetup();
+
+    const playerGroup = await screen.findByRole("group", { name: "Remembered players" });
+    expect(within(playerGroup).getAllByRole("button").length).toBeGreaterThan(0);
+    fireEvent.click(screen.getByRole("button", { name: "Clear players" }));
+
+    expect(window.confirm).toHaveBeenCalledWith("Clear all locally remembered player names for this group?");
+    expect(setRoster).toHaveBeenCalledWith("group-id", []);
+    expect(within(playerGroup).queryAllByRole("button")).toHaveLength(0);
+    expect(screen.queryByRole("button", { name: "Clear players" })).toBeNull();
   });
 });
