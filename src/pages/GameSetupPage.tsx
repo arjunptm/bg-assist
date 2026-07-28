@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import { LoadingCard, Shell } from "../components/Shell";
 import { useGroup } from "../hooks/useGroup";
@@ -27,6 +27,8 @@ export function GameSetupPage() {
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState("");
   const [confirmingStartOver, setConfirmingStartOver] = useState(false);
+  const [confirmingClearPlayers, setConfirmingClearPlayers] = useState(false);
+  const clearPlayersButtonRef = useRef<HTMLButtonElement>(null);
   const sortedRoster = useMemo(() => [...roster].sort(comparePlayerNames), [roster]);
   const normalizedFilter = playerFilter.trim().toLocaleLowerCase();
   const visibleRoster = normalizedFilter
@@ -69,7 +71,6 @@ export function GameSetupPage() {
   }
 
   async function clearPlayers() {
-    if (!window.confirm("Clear all locally remembered player names for this group?")) return;
     updateRoster([]);
     setSelected(new Set());
     setPlayerFilter("");
@@ -77,7 +78,13 @@ export function GameSetupPage() {
     setExclusions({});
     setError("");
     setFeedback("");
+    setConfirmingClearPlayers(false);
     await setRoster(activeGroup.id, []);
+  }
+
+  function cancelClearPlayers() {
+    setConfirmingClearPlayers(false);
+    requestAnimationFrame(() => clearPlayersButtonRef.current?.focus());
   }
 
   function togglePlayer(player: string) {
@@ -172,8 +179,28 @@ export function GameSetupPage() {
       <section className="section">
         <div className="section-heading">
           <div><p className="eyebrow">Step one</p><h2>Who's playing?</h2></div>
-          {roster.length > 0 && <button className="text-button danger" onClick={() => void clearPlayers()}>Clear players</button>}
+          {roster.length > 0 && (
+            <button
+              ref={clearPlayersButtonRef}
+              className="text-button danger"
+              onClick={() => setConfirmingClearPlayers(true)}
+            >
+              Clear players
+            </button>
+          )}
         </div>
+        {confirmingClearPlayers && (
+          <div className="card inline-confirmation" role="region" aria-labelledby="clear-players-title">
+            <div>
+              <h3 id="clear-players-title">Clear remembered players?</h3>
+              <p>This removes player names saved on this device for this group. It does not change the shared game library.</p>
+            </div>
+            <div className="inline-confirmation__actions">
+              <button type="button" className="button button--secondary button--small" autoFocus onClick={cancelClearPlayers}>Cancel</button>
+              <button type="button" className="button button--secondary button--small danger" onClick={() => void clearPlayers()}>Clear players</button>
+            </div>
+          </div>
+        )}
         {roster.length > ROSTER_FILTER_THRESHOLD && (
           <label className="roster-filter">
             Filter players
@@ -305,12 +332,12 @@ export function GameSetupPage() {
             <button type="button" className="button button--secondary button--small" onClick={() => setConfirmingStartOver(true)}>Start over</button>
           </div>
           {confirmingStartOver && (
-            <div className="card start-over-confirmation" role="region" aria-labelledby="start-over-title">
+            <div className="card inline-confirmation" role="region" aria-labelledby="start-over-title">
               <div>
                 <h3 id="start-over-title">Clear current assignments?</h3>
                 <p>Your selected players, available options, and temporary exclusions will stay in place.</p>
               </div>
-              <div className="start-over-confirmation__actions">
+              <div className="inline-confirmation__actions">
                 <button type="button" className="button button--secondary button--small" autoFocus onClick={() => setConfirmingStartOver(false)}>Cancel</button>
                 <button type="button" className="button button--secondary button--small danger" onClick={startOver}>Clear assignments</button>
               </div>

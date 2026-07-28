@@ -10,6 +10,8 @@ completed user-facing and repository-management changes remain under
 
 ### Fixed
 
+- Replaced the native Clear players prompt with an accessible inline confirmation.
+- Improved keyboard focus visibility and enlarged compact mobile action targets.
 - Made group sharing recover with a selectable group link, independent QR
   generation, copy feedback, and graceful native-share and clipboard failure
   handling.
