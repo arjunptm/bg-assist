@@ -25,6 +25,11 @@ The Worker hashes the capability token with SHA-256 before looking up a group.
 D1 stores only the hash, not the original token. There are no endpoints for
 listing, searching, or enumerating groups.
 
+The in-app sharing fallback displays the complete capability link and generates
+its QR code locally. If native sharing or clipboard access is unavailable, the
+link remains selectable for manual copying; no third-party fallback service is
+used.
+
 ## What v1 does not collect
 
 BG Assistant v1 has:
