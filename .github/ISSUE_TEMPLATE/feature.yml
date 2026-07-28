@@ -1,0 +1,58 @@
+name: Feature request
+description: Propose a focused improvement or new board-game utility.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What table-side workflow should become easier?
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Intended outcome
+      description: Describe successful user behavior rather than a preferred implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tool_type
+    attributes:
+      label: Area
+      options:
+        - Generic randomizer
+        - Game-specific tool
+        - Group or sharing
+        - Offline or PWA
+        - Shared game editor
+        - Infrastructure or documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy and persistence
+      description: Should anything be device-only, shared in D1, cached, or temporary?
+
+  - type: textarea
+    id: deferred
+    attributes:
+      label: Out of scope
+      description: What should this request deliberately not include?

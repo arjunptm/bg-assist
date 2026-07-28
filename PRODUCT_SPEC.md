@@ -1,7 +1,6 @@
 # BG Assistant Product Specification
 
-This file is the authoritative product brief for v1. The original planning
-discussion remains in `conversation-handoff.md`.
+This file is the authoritative product brief for v1.
 
 ## Product
 
@@ -72,4 +71,3 @@ React, TypeScript, Vite, Cloudflare Workers Static Assets, a Hono Worker API,
 Cloudflare D1, and Cloudflare's Vite integration. GitHub and Cloudflare setup,
 DNS migration, production deployment, and the `bg.arjunmakes.games` domain are
 deliberately deferred until the local app is reviewed.
-

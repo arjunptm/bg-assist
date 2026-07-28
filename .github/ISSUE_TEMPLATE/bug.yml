@@ -1,0 +1,68 @@
+name: Bug report
+description: Report incorrect or unexpected BG Assistant behavior.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include real group capability links, player names, credentials, or private data.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use generic example names and data.
+      placeholder: |
+        1. Open a group
+        2. Select a game
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection state
+      options:
+        - Online
+        - Offline or cached
+        - Both
+        - Unknown
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Chrome on Android, installed PWA, desktop Firefox, etc.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add sanitized screenshots or console output when useful.

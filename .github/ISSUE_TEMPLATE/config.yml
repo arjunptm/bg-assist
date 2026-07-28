@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Product specification
+    url: https://github.com/arjunptm/bg-assist/blob/main/PRODUCT_SPEC.md
+    about: Review established v1 decisions before proposing a conflicting change.

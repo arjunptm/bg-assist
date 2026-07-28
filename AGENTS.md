@@ -4,7 +4,13 @@
 
 - `PRODUCT_SPEC.md` is the authoritative v1 product specification.
 - `README.md` documents current capabilities and local commands.
-- `conversation-handoff.md` preserves the earlier planning discussion.
+- `docs/architecture.md` documents state ownership and system boundaries.
+- `docs/development.md` defines the repository's branch, review, verification,
+  and pull-request workflow.
+- `docs/roadmap.md` summarizes implementation sequencing; `PRODUCT_SPEC.md`
+  remains authoritative when they differ.
+- `CHANGELOG.md` records notable completed work under `Unreleased` until the
+  first production release.
 - `migrations/` is the authoritative D1 schema history.
 
 ## Stack and commands
@@ -15,6 +21,8 @@
 - Package manager: pnpm 11; runtime: Node.js 22 or newer.
 - Start: `pnpm run db:local`, then `pnpm run dev`.
 - Verify: `pnpm run typecheck`, `pnpm test`, `pnpm run build`.
+- GitHub Actions runs the same checks from `.github/workflows/ci.yml` for pull
+  requests and pushes to `main`.
 - The Codex runtime on this PC does not place Node on PATH. During the initial
   build, its bundled `node.exe` was copied into ignored `node_modules/.bin`.
   This is an environment workaround, not a project dependency.
@@ -44,11 +52,29 @@
 ## Git, deployment, and secrets
 
 - Keep changes within `BG Assistant` unless explicitly asked otherwise.
-- The local repository uses `main` and currently has no remote.
+- When this repository is used inside `W:\Codex Projects`, also follow the
+  workspace-level `REPOSITORY_STANDARDS.md`. This file and
+  `docs/development.md` remain self-contained for standalone clones.
+- The repository uses `main`, with `origin` pointing to
+  `git@github.com:arjunptm/bg-assist.git`.
+- Check related GitHub issues before meaningful work. Use an existing issue
+  when it fits; create or propose a focused issue when it does not.
+- Do not develop meaningful features directly on `main`. Use
+  `AI-<short-description>` branches for Codex-led work and default to a pull
+  request before merging.
+- Direct pushes to `main` require explicit approval and should be limited to
+  low-risk maintenance.
+- Before committing, inspect `git status` and `git diff`, then run verification
+  appropriate to the change. TypeScript or runtime changes normally require
+  `pnpm run typecheck`, `pnpm test`, and `pnpm run build`.
+- UI changes require a local review of the touched mobile workflow. Check dark
+  mode and offline behavior when the change affects either.
+- At handoff, state whether work is local-only, committed, pushed, in a PR,
+  merged, deployed, or released. Never imply a later state without verifying
+  it.
 - Never commit `.dev.vars`, `.env` files, Cloudflare credentials, private
   exports, real capability links, or `.wrangler/` state.
 - `wrangler.jsonc` contains a placeholder D1 ID until the guided Cloudflare
   setup. Do not deploy it as-is.
 - Production target is `bg.arjunmakes.games`, but DNS and Cloudflare setup are
   intentionally deferred.
-
