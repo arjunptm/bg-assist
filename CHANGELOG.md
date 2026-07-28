@@ -15,6 +15,8 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added optional shared descriptions for assignment options, including offline
+  snapshot display in setup and assignment results.
 - Added the initial mobile-first React and TypeScript PWA.
 - Added the capability-scoped Cloudflare Worker API and initial D1 migration.
 - Added locally private player rosters, cached group snapshots, and offline

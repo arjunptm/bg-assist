@@ -21,7 +21,7 @@
 * { box-sizing: border-box; }
 html { min-width: 320px; background: var(--cream); }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
-button, input, select { font: inherit; }
+button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
 a { color: var(--forest); }
@@ -138,7 +138,7 @@ h3 { margin-bottom: .35rem; }
 .icon-button { min-width: 40px; min-height: 40px; border-radius: 10px; }
 .danger { color: var(--danger) !important; }
 label { display: grid; gap: .45rem; font-size: .82rem; font-weight: 700; }
-input, select {
+input, select, textarea {
   width: 100%;
   min-height: 49px;
   border: 1px solid #cfc8bb;
@@ -148,7 +148,8 @@ input, select {
   outline: 0;
   background: #fffefb;
 }
-input:focus, select:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgb(23 63 53 / 12%); }
+textarea { resize: vertical; line-height: 1.45; }
+input:focus, select:focus, textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgb(23 63 53 / 12%); }
 .error { color: var(--danger); line-height: 1.5; }
 .error.card { padding: 1rem; }
 .error-card, .status-card { margin-top: 2rem; padding: 1.5rem; }
@@ -229,6 +230,7 @@ input:focus, select:focus { border-color: var(--forest); box-shadow: 0 0 0 3px r
 .set-editor__heading { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: .8rem; }
 .option-list { display: grid; gap: .6rem; margin: 1rem 0; }
 .option-row { display: grid; grid-template-columns: 1fr 74px auto; align-items: end; gap: .5rem; }
+.option-description { grid-column: 1 / -1; margin-top: .15rem; }
 .quantity input { text-align: center; }
 .reorder-actions, .option-actions { display: flex; align-items: center; }
 .mini-button {
@@ -270,9 +272,10 @@ input:focus, select:focus { border-color: var(--forest); box-shadow: 0 0 0 3px r
 details { border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .65rem; }
 summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 700; }
 .option-toggles { display: flex; flex-wrap: wrap; gap: .45rem; padding-top: .7rem; }
-.option-toggle { border: 1px solid var(--line); border-radius: 10px; padding: .5rem .65rem; background: transparent; cursor: pointer; }
+.option-toggle { display: flex; flex-wrap: wrap; align-items: center; gap: 0 .35rem; border: 1px solid var(--line); border-radius: 10px; padding: .5rem .65rem; background: transparent; cursor: pointer; text-align: left; font-weight: 700; }
 .option-toggle.is-enabled { border-color: #9eb5a7; background: var(--forest-light); }
 .option-toggle span { margin-right: .35rem; }
+.option-toggle small { flex-basis: 100%; margin: .3rem 0 0 1.45rem; color: var(--muted); font-weight: 400; line-height: 1.4; }
 .assignments { border-top: 2px solid var(--ink); margin-top: 2rem; }
 .assignment-card { border-radius: 18px; padding: 1rem; color: white; background: var(--forest); }
 .assignment-card h3 { font-family: Georgia, serif; font-size: 1.45rem; }
@@ -281,6 +284,8 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 .assignment-card dl div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1px solid rgb(255 255 255 / 20%); padding-top: .6rem; }
 .assignment-card dt { color: #bdd1c8; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
 .assignment-card dd { font-weight: 700; text-align: right; }
+.assignment-card dd strong, .assignment-card dd small { display: block; }
+.assignment-card dd small { max-width: 32ch; margin-top: .25rem; color: #d5e5de; font-size: .78rem; font-weight: 400; line-height: 1.35; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
 @media (min-width: 650px) {
@@ -311,7 +316,7 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
   }
   .topbar { background: rgb(17 26 23 / 90%); border-color: var(--line); }
   .brand-mark, .button--primary { color: #10231c; background: #8bc7ae; }
-  input, select { color: var(--ink); background: #121c18; border-color: #46534e; }
+  input, select, textarea { color: var(--ink); background: #121c18; border-color: #46534e; }
   .offline-banner { color: #ffdfa0; background: #4a381b; }
   .assignment-card { color: #f6fff9; background: #26483c; }
   .sticky-actions { background: linear-gradient(transparent, var(--cream) 20%); }

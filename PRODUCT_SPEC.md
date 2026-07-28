@@ -26,6 +26,8 @@ not introduce game-name conditionals into the generic randomizer.
 
 - A game contains independently shuffled Assignment Sets, each containing
   quantity-aware Assignment Options.
+- Assignment options may include short shared descriptions for powers, rules,
+  or setup notes.
 - Current participating players are selected from the local roster. Player
   ordering has no randomization significance.
 - Temporary option exclusions and all current assignment results are ephemeral.

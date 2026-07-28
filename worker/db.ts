@@ -32,6 +32,7 @@ interface OptionRow {
   id: string;
   assignment_set_id: string;
   name: string;
+  description: string;
   quantity: number;
 }
 
@@ -109,7 +110,7 @@ export async function loadSnapshot(db: D1Database, group: GroupRow): Promise<Gro
       : (
           await db
             .prepare(
-              `SELECT id, assignment_set_id, name, quantity FROM assignment_options WHERE assignment_set_id IN (${setIds.map(() => "?").join(",")}) ORDER BY position`
+              `SELECT id, assignment_set_id, name, description, quantity FROM assignment_options WHERE assignment_set_id IN (${setIds.map(() => "?").join(",")}) ORDER BY position`
             )
             .bind(...setIds)
             .all<OptionRow>()
@@ -126,7 +127,12 @@ export async function loadSnapshot(db: D1Database, group: GroupRow): Promise<Gro
   const optionsBySet = new Map<string, AssignmentOption[]>();
   for (const option of options) {
     const collection = optionsBySet.get(option.assignment_set_id) ?? [];
-    collection.push({ id: option.id, name: option.name, quantity: option.quantity });
+    collection.push({
+      id: option.id,
+      name: option.name,
+      description: option.description,
+      quantity: option.quantity
+    });
     optionsBySet.set(option.assignment_set_id, collection);
   }
   const setsByGame = new Map<string, AssignmentSet[]>();
@@ -201,9 +207,9 @@ export async function saveGameAggregate(
       statements.push(
         db
           .prepare(
-            "INSERT INTO assignment_options (id, assignment_set_id, name, quantity, position) VALUES (?, ?, ?, ?, ?)"
+            "INSERT INTO assignment_options (id, assignment_set_id, name, description, quantity, position) VALUES (?, ?, ?, ?, ?, ?)"
           )
-          .bind(option.id, set.id, option.name, option.quantity, optionPosition)
+          .bind(option.id, set.id, option.name, option.description ?? "", option.quantity, optionPosition)
       );
     });
   });

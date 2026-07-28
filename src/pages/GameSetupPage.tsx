@@ -31,7 +31,7 @@ export function GameSetupPage() {
   const activeGame = game;
   const back = `/g/${capability}`;
   const playerIds = [...selected];
-  const optionNames = new Map(game.assignmentSets.flatMap((set) => set.options.map((option) => [option.id, option.name])));
+  const optionById = new Map(game.assignmentSets.flatMap((set) => set.options.map((option) => [option.id, option] as const)));
 
   async function addPlayer(event: FormEvent) {
     event.preventDefault();
@@ -142,6 +142,7 @@ export function GameSetupPage() {
                       }}
                     >
                       <span>{active ? "✓" : "○"}</span>{option.name}{option.quantity > 1 ? ` ×${option.quantity}` : ""}
+                      {option.description && <small>{option.description}</small>}
                     </button>
                   );
                 })}
@@ -162,9 +163,15 @@ export function GameSetupPage() {
               <article className="assignment-card" key={player}>
                 <h3>{player}</h3>
                 <dl>
-                  {game.assignmentSets.map((set) => assignments[set.id]?.[player] && (
-                    <div key={set.id}><dt>{set.name}</dt><dd>{optionNames.get(assignments[set.id]![player]!)}</dd></div>
-                  ))}
+                  {game.assignmentSets.map((set) => {
+                    const option = optionById.get(assignments[set.id]?.[player] ?? "");
+                    return option ? (
+                      <div key={set.id}>
+                        <dt>{set.name}</dt>
+                        <dd><strong>{option.name}</strong>{option.description && <small>{option.description}</small>}</dd>
+                      </div>
+                    ) : null;
+                  })}
                 </dl>
               </article>
             ))}
