@@ -15,6 +15,8 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added public How it works and Privacy sections with a plain-language
+  explanation of shared, device-local, and session-only data.
 - Added optional shared descriptions for assignment options, including offline
   snapshot display in setup and assignment results.
 - Added the initial mobile-first React and TypeScript PWA.

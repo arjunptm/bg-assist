@@ -106,6 +106,85 @@ export function HomePage() {
         </section>
       )}
 
+      <section className="section explainer" aria-labelledby="how-it-works-heading">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">A shared shelf, private players</p>
+            <h2 id="how-it-works-heading">How it works</h2>
+          </div>
+        </div>
+        <div className="info-grid">
+          <article className="info-card">
+            <span className="info-card__number" aria-hidden="true">01</span>
+            <h3>Create a group</h3>
+            <p>Name the group and add the games, assignment sets, options, and restrictions everyone should use.</p>
+          </article>
+          <article className="info-card">
+            <span className="info-card__number" aria-hidden="true">02</span>
+            <h3>Share one link</h3>
+            <p>Anyone with the unguessable group link can open and edit the shared game library - no account required.</p>
+          </article>
+          <article className="info-card">
+            <span className="info-card__number" aria-hidden="true">03</span>
+            <h3>Play on your device</h3>
+            <p>Add player names and make assignments locally. Names and named results are never sent to the shared library.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section privacy-section" aria-labelledby="privacy-heading">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Clear by design</p>
+            <h2 id="privacy-heading">Privacy and storage</h2>
+          </div>
+        </div>
+        <p className="privacy-intro">
+          BG Assistant separates shared game information from personal game-night information. Here is where each kind of data lives.
+        </p>
+        <div className="storage-grid">
+          <article className="storage-card">
+            <p className="storage-card__location">Shared / Cloudflare D1</p>
+            <h3>Game-library configuration</h3>
+            <ul>
+              <li>Group and game names</li>
+              <li>Assignment sets, options, quantities, and banned pairs</li>
+              <li>Revision and timestamp information used to prevent stale edits</li>
+            </ul>
+            <p>The secret part of a group link is stored server-side only as a SHA-256 hash.</p>
+          </article>
+          <article className="storage-card">
+            <p className="storage-card__location">Private / This browser</p>
+            <h3>Device-local information</h3>
+            <ul>
+              <li>Remembered group links</li>
+              <li>Each group's player roster</li>
+              <li>Cached copies of groups previously opened successfully</li>
+            </ul>
+            <p>This information is stored in your browser's IndexedDB and is not sent with shared game updates.</p>
+          </article>
+          <article className="storage-card">
+            <p className="storage-card__location">Temporary / This session</p>
+            <h3>Current setup</h3>
+            <ul>
+              <li>Selected players</li>
+              <li>Temporary option exclusions</li>
+              <li>Current assignment results</li>
+            </ul>
+            <p>These exist only while you use the current page and disappear when you leave or refresh it.</p>
+          </article>
+        </div>
+        <aside className="privacy-callout" role="note">
+          <div>
+            <p className="eyebrow">Treat the link like a key</p>
+            <h3>Anyone with a group link can view and edit that group.</h3>
+          </div>
+          <p>
+            BG Assistant v1 has no accounts, owner recovery, group search, product analytics, or server-side player and assignment history.
+          </p>
+        </aside>
+      </section>
+
       <section className="section game-tools-teaser">
         <p className="eyebrow">More ways to play</p>
         <h2>Game Tools</h2>

@@ -181,6 +181,51 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
 }
 .group-card strong, .group-card small, .game-card strong, .game-card small { display: block; }
 .group-card small, .game-card small { margin-top: .2rem; color: var(--muted); }
+.explainer { border-top: 1px solid var(--line); }
+.info-grid, .storage-grid { display: grid; gap: .8rem; }
+.info-card, .storage-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.1rem;
+  background: var(--paper);
+}
+.info-card__number {
+  display: block;
+  margin-bottom: .8rem;
+  color: var(--coral);
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.info-card p, .storage-card p, .storage-card li, .privacy-intro, .privacy-callout > p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.info-card p, .storage-card p { margin-bottom: 0; }
+.privacy-section { padding-top: 3rem; }
+.privacy-intro { max-width: 720px; margin-bottom: 1.25rem; }
+.storage-card__location {
+  margin-bottom: .6rem !important;
+  color: var(--forest) !important;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.storage-card ul { margin: .85rem 0; padding-left: 1.2rem; }
+.storage-card li + li { margin-top: .35rem; }
+.privacy-callout {
+  display: grid;
+  gap: 1rem;
+  margin-top: .8rem;
+  border-radius: 18px;
+  padding: 1.2rem;
+  color: white;
+  background: var(--forest);
+}
+.privacy-callout .eyebrow { color: #ffd1c5; }
+.privacy-callout h3, .privacy-callout p { margin-bottom: 0; }
+.privacy-callout > p { color: #d5e5de; }
 .game-tools-teaser { margin-top: 2rem; border-top: 1px solid var(--line); }
 .game-card { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); }
 .game-card__main { border: 0; border-radius: 0; padding: 1.15rem; }
@@ -291,6 +336,8 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 @media (min-width: 650px) {
   .shell { padding-top: 2rem; }
   .group-list, .game-grid, .assignment-list { grid-template-columns: repeat(2, 1fr); }
+  .info-grid { grid-template-columns: repeat(3, 1fr); }
+  .privacy-callout { grid-template-columns: 1fr 1fr; align-items: center; padding: 1.4rem; }
   .restriction-builder { grid-template-columns: 1fr 1.5fr auto 1fr 1.5fr; align-items: center; }
   .restriction-builder .button { grid-column: 1 / -1; }
   .restriction-plus { display: inline; text-align: center; font-weight: 700; }
@@ -298,6 +345,7 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 
 @media (min-width: 960px) {
   .game-grid, .assignment-list { grid-template-columns: repeat(3, 1fr); }
+  .storage-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -318,6 +366,8 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
   .brand-mark, .button--primary { color: #10231c; background: #8bc7ae; }
   input, select, textarea { color: var(--ink); background: #121c18; border-color: #46534e; }
   .offline-banner { color: #ffdfa0; background: #4a381b; }
+  .privacy-callout { color: #f6fff9; background: #26483c; }
+  .privacy-callout > p { color: #d5e5de; }
   .assignment-card { color: #f6fff9; background: #26483c; }
   .sticky-actions { background: linear-gradient(transparent, var(--cream) 20%); }
 }
