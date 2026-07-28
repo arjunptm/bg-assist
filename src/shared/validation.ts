@@ -8,6 +8,7 @@ export const groupNameSchema = cleanText("Group name", 80);
 export const assignmentOptionSchema = z.object({
   id: z.string().uuid(),
   name: cleanText("Option name", 80),
+  description: z.string().trim().max(500).optional().default(""),
   quantity: z.number().int().min(1).max(99)
 }).strict();
 

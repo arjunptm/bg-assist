@@ -42,5 +42,6 @@ describe("mobile game editor compatibility", () => {
     expect(screen.getByRole("heading", { name: "New game" })).toBeTruthy();
     expect(screen.getByLabelText("Game name")).toBeTruthy();
     expect(screen.getAllByPlaceholderText(/Option [12]/)).toHaveLength(2);
+    expect(screen.getAllByPlaceholderText("Powers, abilities, or setup notes")).toHaveLength(2);
   });
 });
