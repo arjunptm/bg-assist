@@ -6,6 +6,11 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],
+    pool: "threads",
+    fileParallelism: false,
+    testTimeout: 10_000,
+    hookTimeout: 10_000,
+    teardownTimeout: 5_000,
     coverage: { reporter: ["text", "html"] }
   }
 });
