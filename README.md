@@ -18,7 +18,7 @@ The local v1 baseline includes:
 
 - Account-free group creation and capability links
 - Locally remembered groups and per-group player rosters
-- Shared game, assignment-set, option, quantity, and banned-pair editing
+- Shared editing for games, assignment sets, options, descriptions, quantities, and banned pairs
 - Independent cryptographic shuffling for each assignment set
 - Exact banned-combination solving for up to 12 participating players
 - Soft-deleted games with immediate Undo

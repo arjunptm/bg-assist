@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createGroupSchema, gameDraftSchema } from "../src/shared/validation";
+import { assignmentOptionSchema, createGroupSchema, gameDraftSchema } from "../src/shared/validation";
 
 const optionA = crypto.randomUUID();
 const optionB = crypto.randomUUID();
@@ -9,12 +9,12 @@ const validGame = {
     {
       id: crypto.randomUUID(),
       name: "Factions",
-      options: [{ id: optionA, name: "Rusviet", quantity: 1 }]
+      options: [{ id: optionA, name: "Rusviet", description: "  Move between villages.  ", quantity: 1 }]
     },
     {
       id: crypto.randomUUID(),
       name: "Player Mats",
-      options: [{ id: optionB, name: "Industrial", quantity: 1 }]
+      options: [{ id: optionB, name: "Industrial", description: "", quantity: 1 }]
     }
   ],
   bannedCombinations: [
@@ -24,7 +24,19 @@ const validGame = {
 
 describe("shared API validation", () => {
   it("accepts a valid shared game aggregate", () => {
-    expect(gameDraftSchema.safeParse(validGame).success).toBe(true);
+    const result = gameDraftSchema.safeParse(validGame);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.assignmentSets[0]!.options[0]!.description).toBe("Move between villages.");
+      expect(assignmentOptionSchema.parse({ id: optionB, name: "Industrial", quantity: 1 }).description).toBe("");
+    }
+  });
+
+  it("bounds option descriptions and rejects player-specific option fields", () => {
+    const invalid = structuredClone(validGame);
+    invalid.assignmentSets[0]!.options[0]!.description = "x".repeat(501);
+    expect(gameDraftSchema.safeParse(invalid).success).toBe(false);
+    expect(gameDraftSchema.safeParse({ ...validGame, assignmentSets: [{ ...validGame.assignmentSets[0], options: [{ ...validGame.assignmentSets[0]!.options[0], playerName: "Arjun" }] }, validGame.assignmentSets[1]] }).success).toBe(false);
   });
 
   it("rejects player data rather than allowing it into shared payloads", () => {
@@ -40,6 +52,7 @@ describe("shared API validation", () => {
     invalid.assignmentSets[0]!.options.push({
       id: secondOption,
       name: "Crimea",
+      description: "",
       quantity: 1
     });
     invalid.bannedCombinations = [

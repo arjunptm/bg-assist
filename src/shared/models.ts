@@ -1,6 +1,7 @@
 export interface AssignmentOption {
   id: string;
   name: string;
+  description?: string;
   quantity: number;
 }
 

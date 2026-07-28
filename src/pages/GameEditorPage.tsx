@@ -11,8 +11,8 @@ function freshSet(): AssignmentSet {
     id: createUuid(),
     name: "",
     options: [
-      { id: createUuid(), name: "", quantity: 1 },
-      { id: createUuid(), name: "", quantity: 1 }
+      { id: createUuid(), name: "", description: "", quantity: 1 },
+      { id: createUuid(), name: "", description: "", quantity: 1 }
     ]
   };
 }
@@ -128,10 +128,14 @@ export function GameEditorPage() {
                     <button type="button" className="mini-button" disabled={optionIndex === set.options.length - 1} aria-label={`Move ${option.name || "option"} down`} onClick={() => updateSet(setIndex, { options: moveItem(set.options, optionIndex, optionIndex + 1) })}>↓</button>
                     <button type="button" className="mini-button danger" aria-label={`Remove ${option.name || "option"}`} onClick={() => updateSet(setIndex, { options: set.options.filter((_, index) => index !== optionIndex) })}>×</button>
                   </div>
+                  <label className="option-description">
+                    <span>Description <span className="muted">(optional)</span></span>
+                    <textarea maxLength={500} rows={2} value={option.description ?? ""} onChange={(event) => updateSet(setIndex, { options: set.options.map((item, index) => index === optionIndex ? { ...item, description: event.target.value } : item) })} placeholder="Powers, abilities, or setup notes" />
+                  </label>
                 </div>
               ))}
             </div>
-            <button type="button" className="text-button" onClick={() => updateSet(setIndex, { options: [...set.options, { id: createUuid(), name: "", quantity: 1 }] })}>+ Add {set.name ? set.name.replace(/s$/i, "").toLowerCase() : "option"}</button>
+            <button type="button" className="text-button" onClick={() => updateSet(setIndex, { options: [...set.options, { id: createUuid(), name: "", description: "", quantity: 1 }] })}>+ Add {set.name ? set.name.replace(/s$/i, "").toLowerCase() : "option"}</button>
           </section>
         ))}
 
