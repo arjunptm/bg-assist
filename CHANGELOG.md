@@ -10,6 +10,9 @@ completed user-facing and repository-management changes remain under
 
 ### Fixed
 
+- Made group sharing recover with a selectable group link, independent QR
+  generation, copy feedback, and graceful native-share and clipboard failure
+  handling.
 - Restored mobile game editing when `crypto.randomUUID()` is unavailable and
   added a recoverable route error screen.
 - Prevented interrupted local tests from multiplying into orphaned

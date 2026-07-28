@@ -23,7 +23,7 @@ The local v1 baseline includes:
 - Exact banned-combination solving for up to 12 participating players
 - Soft-deleted games with immediate Undo
 - Optimistic revision conflicts for shared edits
-- Copy, native share, and QR group sharing
+- Native group sharing with selectable manual-link, copy-feedback, and QR fallbacks
 - Cached offline group snapshots and offline randomization
 - Mobile-first responsive UI, system dark mode, and installable PWA metadata
 - Hono Worker API and a versioned D1 migration history
