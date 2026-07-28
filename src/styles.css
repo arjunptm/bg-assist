@@ -338,6 +338,13 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 .assignments { border-top: 2px solid var(--ink); margin-top: 2rem; }
 .assignments__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
 .assignments__heading h2, .assignments__heading .eyebrow { margin-bottom: 0; }
+.start-over-confirmation {
+  display: grid; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: var(--forest-light); box-shadow: none;
+}
+.start-over-confirmation h3, .start-over-confirmation p { margin-bottom: 0; }
+.start-over-confirmation p { color: var(--muted); line-height: 1.5; }
+.start-over-confirmation__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
+.start-over-confirmation__actions .danger { border-color: var(--danger); }
 .assignment-card { border-radius: 18px; padding: 1rem; color: white; background: var(--forest); }
 .assignment-card h3 { font-family: Georgia, serif; font-size: 1.45rem; }
 .assignment-card dl, .assignment-card dd { margin: 0; }
@@ -356,6 +363,7 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
   .privacy-callout { grid-template-columns: 1fr 1fr; align-items: center; padding: 1.4rem; }
   .restriction-builder { grid-template-columns: 1fr 1.5fr auto 1fr 1.5fr; align-items: center; }
   .restriction-builder .button { grid-column: 1 / -1; }
+  .start-over-confirmation { grid-template-columns: 1fr auto; align-items: center; }
   .restriction-plus { display: inline; text-align: center; font-weight: 700; }
 }
 

@@ -25,6 +25,7 @@ export function GameSetupPage() {
   const [exclusions, setExclusions] = useState<PlayerExclusions>({});
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [confirmingStartOver, setConfirmingStartOver] = useState(false);
   const sortedRoster = useMemo(() => [...roster].sort(comparePlayerNames), [roster]);
   const normalizedFilter = playerFilter.trim().toLocaleLowerCase();
   const visibleRoster = normalizedFilter
@@ -127,15 +128,16 @@ export function GameSetupPage() {
   }
 
   function startOver() {
-    if (!window.confirm("Start over and clear all current assignments? Selected players, available options, and temporary exclusions will stay the same.")) return;
     setAssignments({});
     setError("");
     setFeedback("Assignments cleared. Your players, available options, and temporary exclusions are unchanged.");
+    setConfirmingStartOver(false);
   }
 
   function shuffle(setId: string) {
     setError("");
     setFeedback("");
+    setConfirmingStartOver(false);
     const set = activeGame.assignmentSets.find((candidate) => candidate.id === setId)!;
     try {
       const fixed = Object.fromEntries(Object.entries(assignments).filter(([key]) => key !== setId));
@@ -292,8 +294,20 @@ export function GameSetupPage() {
         <section className="section assignments">
           <div className="assignments__heading">
             <div><p className="eyebrow">Current setup</p><h2>Assignments</h2></div>
-            <button type="button" className="button button--secondary button--small" onClick={startOver}>Start over</button>
+            <button type="button" className="button button--secondary button--small" onClick={() => setConfirmingStartOver(true)}>Start over</button>
           </div>
+          {confirmingStartOver && (
+            <div className="card start-over-confirmation" role="region" aria-labelledby="start-over-title">
+              <div>
+                <h3 id="start-over-title">Clear current assignments?</h3>
+                <p>Your selected players, available options, and temporary exclusions will stay in place.</p>
+              </div>
+              <div className="start-over-confirmation__actions">
+                <button type="button" className="button button--secondary button--small" autoFocus onClick={() => setConfirmingStartOver(false)}>Cancel</button>
+                <button type="button" className="button button--secondary button--small danger" onClick={startOver}>Clear assignments</button>
+              </div>
+            </div>
+          )}
           <div className="assignment-list">
             {playerIds.map((player) => (
               <article className="assignment-card" key={player}>

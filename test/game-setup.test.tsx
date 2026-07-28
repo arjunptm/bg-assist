@@ -3,7 +3,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { GameSetupPage } from "../src/pages/GameSetupPage";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
 
 vi.mock("../src/hooks/useGroup", () => {
   const group = {
@@ -101,8 +104,8 @@ describe("local setup controls", () => {
     expect(within(playerGroup).getByRole("button", { name: /Arjun/ }).getAttribute("aria-pressed")).toBe("true");
   });
 
-  it("starts over without clearing session inputs", async () => {
-    const confirm = vi.spyOn(window, "confirm").mockReturnValue(true);
+  it("uses an inline confirmation before starting over", async () => {
+    const confirm = vi.spyOn(window, "confirm");
     renderSetup();
 
     const playerGroup = await screen.findByRole("group", { name: "Remembered players" });
@@ -111,13 +114,21 @@ describe("local setup controls", () => {
     expect(await screen.findByRole("heading", { name: "Assignments" })).toBeTruthy();
 
     fireEvent.click(screen.getByRole("button", { name: "Start over" }));
-    expect(confirm).toHaveBeenCalledTimes(1);
+    expect(confirm).not.toHaveBeenCalled();
+    expect(screen.getByRole("region", { name: "Clear current assignments?" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Assignments" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    expect(screen.queryByRole("region", { name: "Clear current assignments?" })).toBeNull();
+    expect(screen.getByRole("heading", { name: "Assignments" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Start over" }));
+    fireEvent.click(screen.getByRole("button", { name: "Clear assignments" }));
     expect(screen.queryByRole("heading", { name: "Assignments" })).toBeNull();
     expect(screen.getByRole("status").textContent).toContain("Assignments cleared");
     expect(within(playerGroup).getByRole("button", { name: /Arjun/ }).getAttribute("aria-pressed")).toBe("true");
     const availableOptions = screen.getByText("Available options").closest("details");
     expect(within(availableOptions!).getByRole("button", { name: /Dr. Copper/ }).getAttribute("aria-pressed")).toBe("true");
-    confirm.mockRestore();
   });
 
   it("explains when no different constrained reshuffle exists", async () => {
