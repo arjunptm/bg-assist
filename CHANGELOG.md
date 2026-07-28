@@ -12,6 +12,8 @@ completed user-facing and repository-management changes remain under
 
 - Restored mobile game editing when `crypto.randomUUID()` is unavailable and
   added a recoverable route error screen.
+- Prevented interrupted local tests from multiplying into orphaned
+  child-process worker pools by using one bounded Vitest worker thread.
 
 ### Added
 

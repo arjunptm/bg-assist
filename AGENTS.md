@@ -23,6 +23,11 @@
 - Verify: `pnpm run typecheck`, `pnpm test`, `pnpm run build`.
 - GitHub Actions runs the same checks from `.github/workflows/ci.yml` for pull
   requests and pushes to `main`.
+- If a Windows test command is interrupted or times out, check for lingering
+  Vitest or tinypool processes owned by this repository before retrying. Stop
+  only that interrupted test process tree. Never broadly terminate every Node
+  process, and do not mistake an intentional Vite development server for a test
+  worker.
 - The Codex runtime on this PC does not place Node on PATH. During the initial
   build, its bundled `node.exe` was copied into ignored `node_modules/.bin`.
   This is an environment workaround, not a project dependency.

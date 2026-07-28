@@ -93,6 +93,19 @@ GitHub Actions runs the same frozen install, typecheck, test, and build steps
 for pull requests and pushes to `main`. The required check is named
 `Verify source`.
 
+### Interrupted Windows test runs
+
+Vitest uses one worker thread for this repository. This avoids the separate
+child-process pool that can survive when a terminal or automation wrapper is
+forcibly stopped.
+
+If `pnpm test` is interrupted or its caller times out, do not immediately start
+another test run. First check Task Manager for Vitest or tinypool Node.js
+workers whose command line belongs to this repository. Stop only that
+interrupted test process tree; other applications and an intentional Vite
+development server may also use Node.js or esbuild. A normal completed test run
+should leave no test-related workers behind.
+
 ## Handoff
 
 At the end of a task, report:
