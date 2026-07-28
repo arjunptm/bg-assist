@@ -1,7 +1,10 @@
+import type { AssignmentOptionColor } from "./option-colors";
+
 export interface AssignmentOption {
   id: string;
   name: string;
   description?: string;
+  color?: AssignmentOptionColor;
   quantity: number;
 }
 

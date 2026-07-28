@@ -18,7 +18,7 @@ The local v1 baseline includes:
 
 - Account-free group creation and capability links
 - Locally remembered groups and per-group player rosters
-- Shared editing for games, assignment sets, options, descriptions, quantities, and banned pairs
+- Shared editing for games, assignment sets, options, descriptions, optional colors, quantities, and banned pairs
 - Independent cryptographic shuffling for each assignment set
 - Exact banned-combination solving for up to 12 participating players
 - Soft-deleted games with immediate Undo
@@ -26,7 +26,7 @@ The local v1 baseline includes:
 - Copy, native share, and QR group sharing
 - Cached offline group snapshots and offline randomization
 - Mobile-first responsive UI, system dark mode, and installable PWA metadata
-- Hono Worker API and a normalized D1 migration
+- Hono Worker API and a versioned D1 migration history
 
 Player names and named assignment results are never included in shared API
 payloads or D1 records.

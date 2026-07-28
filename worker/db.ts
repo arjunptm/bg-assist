@@ -6,6 +6,7 @@ import type {
   GameDraft,
   GroupSnapshot
 } from "../src/shared/models";
+import type { AssignmentOptionColor } from "../src/shared/option-colors";
 
 interface GroupRow {
   id: string;
@@ -33,6 +34,7 @@ interface OptionRow {
   assignment_set_id: string;
   name: string;
   description: string;
+  color: AssignmentOptionColor | null;
   quantity: number;
 }
 
@@ -110,7 +112,7 @@ export async function loadSnapshot(db: D1Database, group: GroupRow): Promise<Gro
       : (
           await db
             .prepare(
-              `SELECT id, assignment_set_id, name, description, quantity FROM assignment_options WHERE assignment_set_id IN (${setIds.map(() => "?").join(",")}) ORDER BY position`
+              `SELECT id, assignment_set_id, name, description, color, quantity FROM assignment_options WHERE assignment_set_id IN (${setIds.map(() => "?").join(",")}) ORDER BY position`
             )
             .bind(...setIds)
             .all<OptionRow>()
@@ -131,6 +133,7 @@ export async function loadSnapshot(db: D1Database, group: GroupRow): Promise<Gro
       id: option.id,
       name: option.name,
       description: option.description,
+      color: option.color ?? undefined,
       quantity: option.quantity
     });
     optionsBySet.set(option.assignment_set_id, collection);
@@ -207,9 +210,17 @@ export async function saveGameAggregate(
       statements.push(
         db
           .prepare(
-            "INSERT INTO assignment_options (id, assignment_set_id, name, description, quantity, position) VALUES (?, ?, ?, ?, ?, ?)"
+            "INSERT INTO assignment_options (id, assignment_set_id, name, description, color, quantity, position) VALUES (?, ?, ?, ?, ?, ?, ?)"
           )
-          .bind(option.id, set.id, option.name, option.description ?? "", option.quantity, optionPosition)
+          .bind(
+            option.id,
+            set.id,
+            option.name,
+            option.description ?? "",
+            option.color ?? null,
+            option.quantity,
+            optionPosition
+          )
       );
     });
   });

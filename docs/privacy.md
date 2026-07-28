@@ -8,7 +8,7 @@ the Worker API or Cloudflare D1.
 
 | Location | Information | Why it is stored |
 | --- | --- | --- |
-| Cloudflare D1 | Group and game names, assignment sets and options, quantities, banned pairs, revisions, and timestamps | Makes one game library available to everyone with the group link |
+| Cloudflare D1 | Group and game names, assignment sets and options, descriptions, optional colors, quantities, banned pairs, revisions, and timestamps | Makes one game library available to everyone with the group link |
 | Browser IndexedDB | Remembered capability links, the last-used group, per-group player rosters, and cached group snapshots | Remembers groups and players on one device and supports cached offline play |
 | Current page memory | Selected players, temporary option exclusions, and current assignment results | Supports the current setup without creating player or assignment history |
 

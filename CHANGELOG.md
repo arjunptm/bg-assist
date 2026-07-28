@@ -17,6 +17,8 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added optional curated colors for assignment options across editing, setup,
+  assignment results, cached snapshots, and shared persistence.
 - Added public How it works and Privacy sections with a plain-language
   explanation of shared, device-local, and session-only data.
 - Added alphabetical roster filtering, assignment Start over, explanatory

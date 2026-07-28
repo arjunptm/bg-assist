@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { assignmentOptionColors } from "./option-colors";
 
 const cleanText = (label: string, max: number) =>
   z.string().trim().min(1, `${label} is required`).max(max);
@@ -9,6 +10,7 @@ export const assignmentOptionSchema = z.object({
   id: z.string().uuid(),
   name: cleanText("Option name", 80),
   description: z.string().trim().max(500).optional().default(""),
+  color: z.enum(assignmentOptionColors).optional(),
   quantity: z.number().int().min(1).max(99)
 }).strict();
 
