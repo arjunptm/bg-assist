@@ -8,6 +8,11 @@ completed user-facing and repository-management changes remain under
 
 ## Unreleased
 
+### Fixed
+
+- Restored mobile game editing when `crypto.randomUUID()` is unavailable and
+  added a recoverable route error screen.
+
 ### Added
 
 - Added the initial mobile-first React and TypeScript PWA.

@@ -19,6 +19,6 @@
     "jsx": "react-jsx",
     "types": ["vite/client", "vite-plugin-pwa/client", "vitest/globals"]
   },
-  "include": ["src"]
+  "include": ["src", "test/**/*.tsx"]
 }
 
