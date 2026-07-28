@@ -43,5 +43,6 @@ describe("mobile game editor compatibility", () => {
     expect(screen.getByLabelText("Game name")).toBeTruthy();
     expect(screen.getAllByPlaceholderText(/Option [12]/)).toHaveLength(2);
     expect(screen.getAllByPlaceholderText("Powers, abilities, or setup notes")).toHaveLength(2);
+    expect(screen.getAllByRole("combobox", { name: /Color for option/ })).toHaveLength(2);
   });
 });

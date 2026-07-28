@@ -4,6 +4,7 @@ import { LoadingCard, Shell } from "../components/Shell";
 import { useGroup } from "../hooks/useGroup";
 import { getRoster, setRoster } from "../lib/storage";
 import { assignSet, RandomizerError, type AssignmentMap } from "../lib/randomizer";
+import { assignmentOptionColorLabels } from "../shared/option-colors";
 
 type PlayerExclusions = Record<string, Record<string, Set<string>>>;
 
@@ -238,10 +239,17 @@ export function GameSetupPage() {
                     <button
                       type="button"
                       key={option.id}
-                      className={`option-toggle ${active ? "is-enabled" : ""}`}
+                      className={`option-toggle ${active ? "is-enabled" : ""} ${option.color ? "has-option-color" : ""}`}
+                      data-option-color={option.color}
                       aria-pressed={active}
                       onClick={() => toggleOption(set.id, option.id)}
                     >
+                      {option.color && (
+                        <>
+                          <span className="option-color-swatch" aria-hidden="true" />
+                          <span className="sr-only">Color: {assignmentOptionColorLabels[option.color]}. </span>
+                        </>
+                      )}
                       <span>{active ? "✓" : "○"}</span>{option.name}{option.quantity > 1 ? ` ×${option.quantity}` : ""}
                       {option.description && <small>{option.description}</small>}
                     </button>
@@ -318,7 +326,18 @@ export function GameSetupPage() {
                     return option ? (
                       <div key={set.id}>
                         <dt>{set.name}</dt>
-                        <dd><strong>{option.name}</strong>{option.description && <small>{option.description}</small>}</dd>
+                        <dd data-option-color={option.color}>
+                          <strong>
+                            {option.color && (
+                              <>
+                                <span className="option-color-swatch" aria-hidden="true" />
+                                <span className="sr-only">Color: {assignmentOptionColorLabels[option.color]}. </span>
+                              </>
+                            )}
+                            {option.name}
+                          </strong>
+                          {option.description && <small>{option.description}</small>}
+                        </dd>
                       </div>
                     ) : null;
                   })}

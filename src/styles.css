@@ -276,6 +276,27 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
 .option-list { display: grid; gap: .6rem; margin: 1rem 0; }
 .option-row { display: grid; grid-template-columns: 1fr 74px auto; align-items: end; gap: .5rem; }
 .option-description { grid-column: 1 / -1; margin-top: .15rem; }
+.option-color { grid-column: 1 / -1; }
+.option-color__control { display: flex; align-items: center; gap: .55rem; }
+.option-color__control select { flex: 1; }
+.option-color-swatch {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: .85rem;
+  height: .85rem;
+  border: 1px solid rgb(0 0 0 / 25%);
+  border-radius: 50%;
+  background: var(--option-color);
+  vertical-align: -.05rem;
+}
+[data-option-color="red"] { --option-color: #c63d4f; }
+[data-option-color="orange"] { --option-color: #d86d24; }
+[data-option-color="yellow"] { --option-color: #d1a51b; }
+[data-option-color="green"] { --option-color: #39845b; }
+[data-option-color="blue"] { --option-color: #3677b3; }
+[data-option-color="purple"] { --option-color: #7c55a5; }
+[data-option-color="pink"] { --option-color: #c34f87; }
+[data-option-color="gray"] { --option-color: #6f7a76; }
 .quantity input { text-align: center; }
 .reorder-actions, .option-actions { display: flex; align-items: center; }
 .mini-button {
@@ -327,6 +348,8 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 .exclusion-list { display: grid; gap: .65rem; }
 .exclusion-player { min-width: 0; margin: 0; border: 1px solid var(--line); border-radius: 12px; padding: .7rem; }
 .exclusion-player legend { padding: 0 .3rem; font-weight: 700; }
+.option-toggle.has-option-color { border-inline-start: .35rem solid var(--option-color); }
+.option-toggle .option-color-swatch { margin-right: 0; }
 .exclusion-options { display: flex; flex-wrap: wrap; gap: .4rem; }
 .exclusion-toggle {
   display: inline-flex; min-height: 40px; align-items: center; gap: .4rem; border: 1px solid var(--line);
@@ -356,6 +379,7 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 .assignment-card dd small { max-width: 32ch; margin-top: .25rem; color: #d5e5de; font-size: .78rem; font-weight: 400; line-height: 1.35; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
+.assignment-card dd strong .option-color-swatch { margin-right: .4rem; }
 @media (min-width: 650px) {
   .shell { padding-top: 2rem; }
   .group-list, .game-grid, .assignment-list { grid-template-columns: repeat(2, 1fr); }

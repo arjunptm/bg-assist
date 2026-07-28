@@ -48,7 +48,7 @@ D1 stores:
 
 - Groups and friendly names
 - Games and soft-deletion state
-- Assignment sets, options, and optional option descriptions
+- Assignment sets, options, and optional option descriptions and colors
 - Option quantities
 - Explicit banned option pairs
 - Revision and timestamp metadata
