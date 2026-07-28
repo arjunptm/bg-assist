@@ -3,15 +3,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { LoadingCard, Shell } from "../components/Shell";
 import { useGroup } from "../hooks/useGroup";
 import { saveGame } from "../lib/api";
+import { createUuid } from "../lib/uuid";
 import type { AssignmentSet, GameDraft } from "../shared/models";
 
 function freshSet(): AssignmentSet {
   return {
-    id: crypto.randomUUID(),
+    id: createUuid(),
     name: "",
     options: [
-      { id: crypto.randomUUID(), name: "", quantity: 1 },
-      { id: crypto.randomUUID(), name: "", quantity: 1 }
+      { id: createUuid(), name: "", quantity: 1 },
+      { id: createUuid(), name: "", quantity: 1 }
     ]
   };
 }
@@ -29,7 +30,11 @@ export function GameEditorPage() {
   const navigate = useNavigate();
   const { group, loading, stale } = useGroup(capability);
   const existing = useMemo(() => group?.games.find((game) => game.id === gameId), [group, gameId]);
-  const [draft, setDraft] = useState<GameDraft>({ name: "", assignmentSets: [freshSet()], bannedCombinations: [] });
+  const [draft, setDraft] = useState<GameDraft>(() => ({
+    name: "",
+    assignmentSets: [freshSet()],
+    bannedCombinations: []
+  }));
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -126,7 +131,7 @@ export function GameEditorPage() {
                 </div>
               ))}
             </div>
-            <button type="button" className="text-button" onClick={() => updateSet(setIndex, { options: [...set.options, { id: crypto.randomUUID(), name: "", quantity: 1 }] })}>+ Add {set.name ? set.name.replace(/s$/i, "").toLowerCase() : "option"}</button>
+            <button type="button" className="text-button" onClick={() => updateSet(setIndex, { options: [...set.options, { id: createUuid(), name: "", quantity: 1 }] })}>+ Add {set.name ? set.name.replace(/s$/i, "").toLowerCase() : "option"}</button>
           </section>
         ))}
 
@@ -155,7 +160,7 @@ function RestrictionsEditor({ draft, onChange }: { draft: GameDraft; onChange: (
     if (!optionA || !optionB) return;
     onChange({
       ...draft,
-      bannedCombinations: [...draft.bannedCombinations, { id: crypto.randomUUID(), optionAId: optionA, optionBId: optionB }]
+      bannedCombinations: [...draft.bannedCombinations, { id: createUuid(), optionAId: optionA, optionBId: optionB }]
     });
     setOptionA("");
     setOptionB("");
