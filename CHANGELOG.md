@@ -15,6 +15,8 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added public How it works and Privacy sections with a plain-language
+  explanation of shared, device-local, and session-only data.
 - Added the initial mobile-first React and TypeScript PWA.
 - Added the capability-scoped Cloudflare Worker API and initial D1 migration.
 - Added locally private player rosters, cached group snapshots, and offline

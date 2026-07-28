@@ -74,6 +74,7 @@ change-specific verification, commit guidance, and pull-request process.
 
 - [Product specification](PRODUCT_SPEC.md)
 - [Architecture](docs/architecture.md)
+- [Privacy and data storage](docs/privacy.md)
 - [Development workflow](docs/development.md)
 - [Roadmap](docs/roadmap.md)
 - [Changelog](CHANGELOG.md)
