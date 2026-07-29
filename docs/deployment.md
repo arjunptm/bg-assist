@@ -23,7 +23,7 @@ Merging code must never apply database migrations automatically.
 - `pnpm run build` verifies PWA metadata, icons, service-worker output, SPA
   fallback, the D1 binding, and disabled persisted logging.
 - Tests verify both a clean install through all migrations and an upgrade from
-  a populated initial schema through migrations 0002 and 0003.
+  a populated initial schema through migrations 0002, 0003, and 0004.
 
 ## One-time account and development database setup
 
@@ -73,6 +73,7 @@ Expected migration files are:
 1. `0001_initial.sql`
 2. `0002_option_descriptions.sql`
 3. `0003_option_colors.sql`
+4. `0004_hex_option_colors.sql`
 
 Never add `db:remote:migrate` to the deploy command. Review and run it only when
 a checked-in feature introduces a D1 migration.

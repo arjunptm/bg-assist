@@ -28,8 +28,9 @@ not introduce game-name conditionals into the generic randomizer.
   quantity-aware Assignment Options.
 - Assignment options may include short shared descriptions for powers, rules,
   or setup notes.
-- Assignment options may define one optional color from a curated shared
-  palette. Color is decorative metadata and never affects assignment logic.
+- Assignment options may define one optional color with an arbitrary UI color picker.
+  Colors are stored and exported as canonical uppercase `#RRGGBB` values. Color
+  is decorative metadata and never affects assignment logic.
 - Current participating players are selected from the local roster. Player
   ordering has no randomization significance.
 - Temporary option exclusions and all current assignment results are ephemeral.

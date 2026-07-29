@@ -5,11 +5,7 @@ import { useGroup } from "../hooks/useGroup";
 import { saveGame } from "../lib/api";
 import { createUuid } from "../lib/uuid";
 import type { AssignmentSet, GameDraft } from "../shared/models";
-import {
-  assignmentOptionColorLabels,
-  assignmentOptionColors,
-  type AssignmentOptionColor
-} from "../shared/option-colors";
+import { defaultAssignmentOptionColor, normalizeAssignmentOptionColor } from "../shared/option-colors";
 
 function freshSet(): AssignmentSet {
   return {
@@ -137,39 +133,54 @@ export function GameEditorPage() {
                     <span>Description <span className="muted">(optional)</span></span>
                     <textarea maxLength={500} rows={2} value={option.description ?? ""} onChange={(event) => updateSet(setIndex, { options: set.options.map((item, index) => index === optionIndex ? { ...item, description: event.target.value } : item) })} placeholder="Powers, abilities, or setup notes" />
                   </label>
-                  <label className="option-color">
-                    <span>Color <span className="muted">(optional)</span></span>
-                    <span className="option-color__control">
-                      {option.color && (
-                        <span
-                          className="option-color-swatch"
-                          data-option-color={option.color}
-                          aria-hidden="true"
-                        />
-                      )}
-                      <select
-                        aria-label={`Color for ${option.name || `option ${optionIndex + 1}`}`}
-                        value={option.color ?? ""}
-                        onChange={(event) => {
-                          const color = event.target.value as AssignmentOptionColor | "";
-                          updateSet(setIndex, {
-                            options: set.options.map((item, index) =>
-                              index === optionIndex
-                                ? { ...item, color: color || undefined }
-                                : item
-                            )
-                          });
-                        }}
-                      >
-                        <option value="">Default</option>
-                        {assignmentOptionColors.map((color) => (
-                          <option key={color} value={color}>
-                            {assignmentOptionColorLabels[color]}
-                          </option>
-                        ))}
-                      </select>
+                  <div className="option-color">
+                    <span id={`option-color-${option.id}`}>
+                      Color <span className="muted">(optional)</span>
                     </span>
-                  </label>
+                    {option.color ? (
+                      <div className="option-color__control">
+                        <input
+                          type="color"
+                          aria-label={`Color for ${option.name || `option ${optionIndex + 1}`}`}
+                          value={option.color}
+                          onChange={(event) => {
+                            const color = normalizeAssignmentOptionColor(event.target.value);
+                            updateSet(setIndex, {
+                              options: set.options.map((item, index) =>
+                                index === optionIndex ? { ...item, color } : item
+                              )
+                            });
+                          }}
+                        />
+                        <output aria-live="polite">{option.color}</output>
+                        <button
+                          type="button"
+                          className="text-button"
+                          onClick={() => updateSet(setIndex, {
+                            options: set.options.map((item, index) =>
+                              index === optionIndex ? { ...item, color: undefined } : item
+                            )
+                          })}
+                        >
+                          Remove color
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="button button--secondary button--small option-color__add"
+                        onClick={() => updateSet(setIndex, {
+                          options: set.options.map((item, index) =>
+                            index === optionIndex
+                              ? { ...item, color: defaultAssignmentOptionColor }
+                              : item
+                          )
+                        })}
+                      >
+                        Add color
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

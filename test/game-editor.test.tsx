@@ -50,7 +50,7 @@ describe("mobile game editor flows", () => {
     expect(screen.getByLabelText("Game name")).toBeTruthy();
     expect(screen.getAllByPlaceholderText(/Option [12]/)).toHaveLength(2);
     expect(screen.getAllByPlaceholderText("Powers, abilities, or setup notes")).toHaveLength(2);
-    expect(screen.getAllByRole("combobox", { name: /Color for option/ })).toHaveLength(2);
+    expect(screen.getAllByRole("button", { name: "Add color" })).toHaveLength(2);
   });
 
   it("saves a strictly shared game draft with the selected option color", async () => {
@@ -68,9 +68,11 @@ describe("mobile game editor flows", () => {
     const optionInputs = screen.getAllByPlaceholderText(/Factions [12]/);
     fireEvent.change(optionInputs[0]!, { target: { value: "Rusviet" } });
     fireEvent.change(optionInputs[1]!, { target: { value: "Crimea" } });
-    fireEvent.change(screen.getByRole("combobox", { name: "Color for Rusviet" }), {
-      target: { value: "red" }
+    fireEvent.click(screen.getAllByRole("button", { name: "Add color" })[0]!);
+    fireEvent.change(screen.getByLabelText("Color for Rusviet"), {
+      target: { value: "#c63d4f" }
     });
+    expect(screen.getByText("#C63D4F")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Save game" }));
 
     await waitFor(() => expect(saveGame).toHaveBeenCalledTimes(1));
@@ -82,7 +84,7 @@ describe("mobile game editor flows", () => {
         {
           name: "Factions",
           options: [
-            { name: "Rusviet", color: "red", quantity: 1 },
+            { name: "Rusviet", color: "#C63D4F", quantity: 1 },
             { name: "Crimea", quantity: 1 }
           ]
         }

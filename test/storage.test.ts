@@ -51,7 +51,7 @@ describe("device-local IndexedDB storage", () => {
                 {
                   id: crypto.randomUUID(),
                   name: "Rusviet",
-                  color: "red",
+                  color: "#C63D4F",
                   quantity: 1
                 }
               ]

@@ -11,7 +11,7 @@ is created; it does not replace the SQL in `migrations/`.
 | `groups` | Friendly group metadata and a unique SHA-256 capability hash |
 | `games` | Ordered, revisioned game definitions with soft deletion |
 | `assignment_sets` | Ordered assignment categories belonging to a game |
-| `assignment_options` | Ordered quantity-aware options with description and optional curated color |
+| `assignment_options` | Ordered quantity-aware options with description and optional canonical hex color |
 | `banned_combinations` | Validated cross-set option pairs that cannot be assigned together |
 | `d1_migrations` | Wrangler's applied-migration ledger |
 
@@ -43,8 +43,10 @@ speculative v1 tables.
    indexes.
 2. `0002_option_descriptions.sql` adds a non-null description with an empty
    default, preserving existing options.
-3. `0003_option_colors.sql` adds a nullable color constrained to the curated
-   palette.
+3. `0003_option_colors.sql` adds a nullable color constrained to the original
+   curated palette.
+4. `0004_hex_option_colors.sql` converts named colors to uppercase `#RRGGBB`
+   values and constrains future values to that canonical format.
 
 Automated tests create a clean schema through the complete history and upgrade
-a populated 0001 database through 0002 and 0003 without losing option data.
+a populated 0001 database through 0002, 0003, and 0004 without losing option data.

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createUuid } from "./uuid";
 import type { Game, GameDraft } from "../shared/models";
-import { assignmentOptionColors } from "../shared/option-colors";
+import { assignmentOptionColorSchema } from "../shared/option-colors";
 
 export const CONFIGURATION_BACKUP_FORMAT = "bg-assistant-configuration";
 export const CONFIGURATION_BACKUP_VERSION = 1;
@@ -11,7 +11,7 @@ export const MAX_BACKUP_GAMES = 50;
 const portableOptionSchema = z.object({
   name: z.string().trim().min(1).max(80),
   description: z.string().trim().max(500).optional(),
-  color: z.enum(assignmentOptionColors).optional(),
+  color: assignmentOptionColorSchema.optional(),
   quantity: z.number().int().min(1).max(99)
 }).strict();
 

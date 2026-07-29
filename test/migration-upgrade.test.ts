@@ -62,6 +62,12 @@ describe("D1 migration history", () => {
 
     await applyMigration("0002_option_descriptions.sql");
     await applyMigration("0003_option_colors.sql");
+    await database
+      .prepare("UPDATE assignment_options SET color = ? WHERE id = ?")
+      .bind("red", "option")
+      .run();
+    await applyMigration("0004_hex_option_colors.sql");
+
 
     const option = await database
       .prepare("SELECT name, description, color FROM assignment_options WHERE id = ?")
@@ -70,7 +76,7 @@ describe("D1 migration history", () => {
     expect(option).toEqual({
       name: "Rusviet",
       description: "",
-      color: null
+      color: "#C63D4F"
     });
 
     const columns = await database
@@ -85,6 +91,18 @@ describe("D1 migration history", () => {
       "description",
       "color"
     ]);
+    await expect(
+      database
+        .prepare("UPDATE assignment_options SET color = ? WHERE id = ?")
+        .bind("#c63d4f", "option")
+        .run()
+    ).rejects.toThrow();
+    await expect(
+      database
+        .prepare("UPDATE assignment_options SET color = ? WHERE id = ?")
+        .bind("red", "option")
+        .run()
+    ).rejects.toThrow();
     expect(columns.results.find((column) => column.name === "description")?.notnull).toBe(1);
   });
 });
