@@ -43,7 +43,7 @@ export function ConfigurationBackup({
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = `${safeFileName(label)}-bg-assistant.json`;
+      anchor.download = `${safeFileName(label)}-game-night.json`;
       anchor.click();
       URL.revokeObjectURL(url);
       setMessage(
@@ -148,7 +148,7 @@ export function ConfigurationBackup({
             className="sr-only"
             type="file"
             accept=".json,application/json"
-            aria-label="Choose a BG Assistant configuration backup"
+            aria-label="Choose a Game Night configuration backup"
             onChange={(event) => void chooseFile(event)}
           />
         </div>

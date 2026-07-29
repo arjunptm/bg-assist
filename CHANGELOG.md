@@ -1,12 +1,18 @@
 # Changelog
 
-All notable changes to BG Assistant will be documented in this file.
+All notable changes to Game Night will be documented in this file.
 
 The application has not yet had its first production release. Until then,
 completed user-facing and repository-management changes remain under
 `Unreleased`.
 
 ## Unreleased
+
+### Changed
+
+- Updated the public product name, PWA metadata, sharing language, examples,
+  backup-facing text, and documentation from BG Assistant to Game Night while
+  preserving compatibility-sensitive internal identifiers.
 
 ### Fixed
 

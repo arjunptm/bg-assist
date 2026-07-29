@@ -1,10 +1,10 @@
-# BG Assistant Product Specification
+# Game Night Product Specification
 
 This file is the authoritative product brief for v1.
 
 ## Product
 
-BG Assistant is a mobile-first PWA containing lightweight utilities for running
+Game Night is a mobile-first PWA containing lightweight utilities for running
 board-game nights. Its first tool is a configurable player-assignment
 randomizer. Future, code-owned Game Tools must remain self-contained and must
 not introduce game-name conditionals into the generic randomizer.

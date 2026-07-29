@@ -77,8 +77,8 @@ describe("home page flows", () => {
     renderHome();
 
     fireEvent.click(screen.getByRole("button", { name: "Join a group" }));
-    fireEvent.change(screen.getByLabelText("BG Assistant link"), {
-      target: { value: `https://bg.arjunmakes.games/g/${capability}` }
+    fireEvent.change(screen.getByLabelText("Game Night link"), {
+      target: { value: `https://gamenight.ludicmethods.com/g/${capability}` }
     });
     fireEvent.click(screen.getByRole("button", { name: "Open group" }));
 
@@ -90,11 +90,11 @@ describe("home page flows", () => {
   it("rejects malformed group links visibly", () => {
     renderHome();
     fireEvent.click(screen.getByRole("button", { name: "Join a group" }));
-    fireEvent.change(screen.getByLabelText("BG Assistant link"), {
+    fireEvent.change(screen.getByLabelText("Game Night link"), {
       target: { value: "not a group link" }
     });
     fireEvent.click(screen.getByRole("button", { name: "Open group" }));
 
-    expect(screen.getByRole("alert").textContent).toContain("Paste a valid BG Assistant group link.");
+    expect(screen.getByRole("alert").textContent).toContain("Paste a valid Game Night group link.");
   });
 });

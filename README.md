@@ -1,10 +1,10 @@
-# BG Assistant
+# Game Night
 
 [![CI](https://github.com/arjunptm/bg-assist/actions/workflows/ci.yml/badge.svg)](https://github.com/arjunptm/bg-assist/actions/workflows/ci.yml)
 ![Node.js 22+](https://img.shields.io/badge/Node.js-22%2B-43853d)
 ![PWA](https://img.shields.io/badge/PWA-installable-173f35)
 
-BG Assistant is a mobile-first PWA for getting a board-game session started
+Game Night is a mobile-first PWA for getting a board-game session started
 quickly. Groups share a configurable game library through an unguessable link,
 while player names and assignment results remain private on each device.
 

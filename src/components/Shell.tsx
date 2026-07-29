@@ -19,9 +19,9 @@ export function Shell({
               ←
             </Link>
           ) : (
-            <span className="brand-mark" aria-hidden="true">BG</span>
+            <span className="brand-mark" aria-hidden="true">GN</span>
           )}
-          <Link className="wordmark" to="/">BG Assistant</Link>
+          <Link className="wordmark" to="/">Game Night</Link>
         </div>
       </header>
       <main className="shell">{children}</main>
@@ -48,4 +48,3 @@ export function EmptyState({
     </div>
   );
 }
-

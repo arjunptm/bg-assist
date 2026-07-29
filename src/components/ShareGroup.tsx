@@ -52,7 +52,7 @@ export function ShareGroup({ name }: { name: string }) {
       return;
     }
     try {
-      await navigator.share({ title: `${name} · BG Assistant`, url });
+      await navigator.share({ title: `${name} · Game Night`, url });
     } catch (error) {
       if (!isShareCancellation(error)) {
         openFallback("Native sharing was unavailable. Choose another option below.");

@@ -18,7 +18,7 @@ Merging code must never apply database migrations automatically.
   A D1 ID is resource configuration and may be committed; account credentials
   and API tokens must not be committed.
 - Persisted Workers observability is disabled because invocation logs include
-  the request URL, and BG Assistant capability tokens appear in API paths.
+  the request URL, and Game Night capability tokens appear in API paths.
 - `pnpm run build` verifies PWA metadata, icons, service-worker output, SPA
   fallback, the D1 binding, and disabled persisted logging.
 - Tests verify both a clean install through all migrations and an upgrade from

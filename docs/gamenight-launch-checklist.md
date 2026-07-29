@@ -1,6 +1,6 @@
 # Game Night launch checklist
 
-This is the ordered, follow-along checklist for launching BG Assistant publicly
+This is the ordered, follow-along checklist for launching Game Night publicly
 as **Game Night** at:
 
 ```text
@@ -366,7 +366,7 @@ Do not point the public hostname at the development Worker or database.
 ### 9. Complete the public-brand pass (Codex-led, Arjun-reviewed)
 
 Create a focused issue and pull request that changes user-visible branding from
-BG Assistant to Game Night while retaining compatibility-sensitive internals.
+legacy BG Assistant branding to Game Night while retaining compatibility-sensitive internals.
 
 Update and verify:
 

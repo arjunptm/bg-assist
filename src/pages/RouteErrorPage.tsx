@@ -9,7 +9,7 @@ export function RouteErrorPage() {
     <Shell>
       <section className="card error-card route-error" role="alert">
         <p className="eyebrow">{notFound ? "Page not found" : "Something went wrong"}</p>
-        <h1>{notFound ? "That page isn't on the table." : "BG Assistant hit an unexpected error."}</h1>
+        <h1>{notFound ? "That page isn't on the table." : "Game Night hit an unexpected error."}</h1>
         <p className="muted">
           {notFound
             ? "The link may be incomplete or no longer available."
