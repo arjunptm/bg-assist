@@ -24,6 +24,8 @@ The local v1 baseline includes:
 - Soft-deleted games with immediate Undo
 - Optimistic revision conflicts for shared edits
 - Native group sharing with selectable manual-link, copy-feedback, and QR fallbacks
+- Versioned one-game or whole-library configuration export/import without
+  capability links or player data
 - Cached offline group snapshots and offline randomization
 - Mobile-first responsive UI, system dark mode, and installable PWA metadata
 - Hono Worker API and a versioned D1 migration history

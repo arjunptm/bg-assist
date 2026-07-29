@@ -26,6 +26,8 @@ Shared frontend responsibilities are separated as follows:
 
 - `src/shared/` contains backend-safe models and strict validation schemas.
 - `src/lib/api.ts` contains the capability-scoped API client.
+- `src/lib/configuration-backup.ts` owns the versioned, credential-free portable
+  game format, strict import validation, and identifier remapping.
 - `src/lib/storage.ts` owns device-local IndexedDB state.
 - `src/lib/randomizer.ts` owns assignment and restriction solving.
 - `src/hooks/useGroup.ts` refreshes online snapshots and falls back to cached

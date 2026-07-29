@@ -53,6 +53,21 @@ not introduce game-name conditionals into the generic randomizer.
   the editor to reload; real-time collaboration and conflict merging are out of
   scope.
 
+## Portable configuration backup
+
+- A user can export one game or all active games in a group as a versioned JSON
+  configuration file.
+- Configuration exports contain names, sets, options, descriptions, colors,
+  quantities, ordering, and banned-pair relationships. They exclude group
+  identifiers and capability links, player names, selections, exclusions,
+  assignments, results, revisions, timestamps, and cached device state.
+- Import validates the complete file locally, previews its contents, remaps all
+  identifiers, and creates new game copies in an existing group. It never
+  overwrites an existing game; name conflicts receive a visible imported-copy
+  suffix.
+- Importing shared configuration requires a connection. It does not recover the
+  original group identity or capability link.
+
 ## Offline and PWA
 
 - The installed or browser-based PWA uses `/` for its stable ID, start URL, and
