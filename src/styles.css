@@ -187,28 +187,38 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
 .group-card strong, .group-card small, .game-card strong, .game-card small { display: block; }
 .group-card small, .game-card small { margin-top: .2rem; color: var(--muted); }
 .explainer { border-top: 1px solid var(--line); }
-.info-grid, .storage-grid { display: grid; gap: .8rem; }
-.info-card, .storage-card {
+.info-grid { display: grid; gap: .8rem; }
+.info-card {
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 1.1rem;
   background: var(--paper);
 }
-.info-card__number {
-  display: block;
+.info-card__meta {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
   margin-bottom: .8rem;
+}
+.info-card__icon {
+  color: var(--forest);
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", sans-serif;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.info-card__number {
   color: var(--coral);
   font-family: Georgia, serif;
   font-size: 1.15rem;
   font-weight: 700;
 }
-.info-card p, .storage-card p, .storage-card li, .privacy-intro, .privacy-callout > p {
+.info-card p, .privacy-intro {
   color: var(--muted);
   line-height: 1.6;
 }
-.info-card p, .storage-card p { margin-bottom: 0; }
-.privacy-section { padding-top: 3rem; }
-.privacy-intro { max-width: 720px; margin-bottom: 1.25rem; }
+.info-card p { margin-bottom: 0; }
+.privacy-section { padding-top: 2rem; }
+.privacy-intro { max-width: 760px; margin-bottom: 1rem; }
 .storage-card__location {
   margin-bottom: .6rem !important;
   color: var(--forest) !important;
@@ -217,20 +227,13 @@ input:focus, select:focus, textarea:focus { border-color: var(--forest); box-sha
   letter-spacing: .12em;
   text-transform: uppercase;
 }
-.storage-card ul { margin: .85rem 0; padding-left: 1.2rem; }
-.storage-card li + li { margin-top: .35rem; }
-.privacy-callout {
-  display: grid;
-  gap: 1rem;
-  margin-top: .8rem;
-  border-radius: 18px;
-  padding: 1.2rem;
-  color: white;
-  background: var(--forest);
-}
-.privacy-callout .eyebrow { color: #ffd1c5; }
-.privacy-callout h3, .privacy-callout p { margin-bottom: 0; }
-.privacy-callout > p { color: #d5e5de; }
+.privacy-details { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); }
+.privacy-details summary { padding: 1rem 1.1rem; color: var(--forest); cursor: pointer; font-weight: 700; }
+.privacy-details[open] summary { border-bottom: 1px solid var(--line); }
+.privacy-details__content { display: grid; gap: 1.25rem; padding: 1.1rem; }
+.privacy-detail h3 { margin-bottom: .45rem; }
+.privacy-detail p { color: var(--muted); line-height: 1.6; }
+.privacy-detail p:last-child { margin-bottom: 0; }
 .game-tools-teaser { margin-top: 2rem; border-top: 1px solid var(--line); }
 .game-card { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); }
 .game-card__main { border: 0; border-radius: 0; padding: 1.15rem; }
@@ -409,7 +412,9 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
   .shell { padding-top: 2rem; }
   .group-list, .game-grid, .assignment-list { grid-template-columns: repeat(2, 1fr); }
   .info-grid { grid-template-columns: repeat(3, 1fr); }
-  .privacy-callout { grid-template-columns: 1fr 1fr; align-items: center; padding: 1.4rem; }
+  .privacy-details__content { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .privacy-detail { padding-right: 1.25rem; }
+  .privacy-detail + .privacy-detail { border-left: 1px solid var(--line); padding-right: 0; padding-left: 1.25rem; }
   .restriction-builder { grid-template-columns: 1fr 1.5fr auto 1fr 1.5fr; align-items: center; }
   .restriction-builder .button { grid-column: 1 / -1; }
   .inline-confirmation { grid-template-columns: 1fr auto; align-items: center; }
@@ -418,7 +423,6 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
 
 @media (min-width: 960px) {
   .game-grid, .assignment-list { grid-template-columns: repeat(3, 1fr); }
-  .storage-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -439,8 +443,6 @@ summary { cursor: pointer; color: var(--muted); font-size: .86rem; font-weight: 
   .brand-mark, .button--primary { color: #10231c; background: #8bc7ae; }
   input, select, textarea { color: var(--ink); background: #121c18; border-color: #46534e; }
   .offline-banner { color: #ffdfa0; background: #4a381b; }
-  .privacy-callout { color: #f6fff9; background: #26483c; }
-  .privacy-callout > p { color: #d5e5de; }
   .assignment-card { color: #f6fff9; background: #26483c; }
   .sticky-actions { background: linear-gradient(transparent, var(--cream) 20%); }
 }

@@ -43,10 +43,10 @@ export function HomePage() {
   return (
     <Shell>
       <section className="hero">
-        <p className="eyebrow">Game night, minus the setup debate</p>
-        <h1>Deal out the fun.<br /><span>Keep names private.</span></h1>
+        <p className="eyebrow">Board-game role randomizer</p>
+        <h1>Deal out the fun.<br /><span>Randomize every role.</span></h1>
         <p className="hero__copy">
-          Pick a game, choose who's playing, and make fair assignments in a few taps.
+          Set up roles, teams, colors, characters, starting positions, or anything else your game assigns. Then deal everything out in a few taps.
         </p>
         <div className="hero__actions">
           <button className="button button--primary" onClick={() => { setMode("create"); setValue(""); }}>
@@ -61,7 +61,7 @@ export function HomePage() {
       {mode !== "none" && (
         <form className="card inline-form" onSubmit={(event) => void submit(event)}>
           <div>
-            <p className="eyebrow">{mode === "create" ? "New shared library" : "Open a shared library"}</p>
+            <p className="eyebrow">{mode === "create" ? "New game-night group" : "Join a game-night group"}</p>
             <h2>{mode === "create" ? "Name your group" : "Paste the group link"}</h2>
           </div>
           <label>
@@ -88,7 +88,7 @@ export function HomePage() {
       {groups.length > 0 && (
         <section className="section">
           <div className="section-heading">
-            <div><p className="eyebrow">Saved on this device</p><h2>Your groups</h2></div>
+            <div><p className="eyebrow">Recently opened</p><h2>Your groups</h2></div>
           </div>
           <div className="group-list">
             {groups.map((group) => (
@@ -109,25 +109,34 @@ export function HomePage() {
       <section className="section explainer" aria-labelledby="how-it-works-heading">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">A shared shelf, private players</p>
+            <p className="eyebrow">Set it up once. Deal it out anytime.</p>
             <h2 id="how-it-works-heading">How it works</h2>
           </div>
         </div>
         <div className="info-grid">
           <article className="info-card">
-            <span className="info-card__number" aria-hidden="true">01</span>
-            <h3>Create a group</h3>
-            <p>Name the group and add the games, assignment sets, options, and restrictions everyone should use.</p>
+            <div className="info-card__meta" aria-hidden="true">
+              <span className="info-card__icon">⚙︎</span>
+              <span className="info-card__number">01</span>
+            </div>
+            <h3>Configure your game</h3>
+            <p>Add the roles, colors, teams, characters, starting positions, and restrictions your board game needs.</p>
           </article>
           <article className="info-card">
-            <span className="info-card__number" aria-hidden="true">02</span>
-            <h3>Share one link</h3>
-            <p>Anyone with the unguessable group link can open and edit the shared game library - no account required.</p>
+            <div className="info-card__meta" aria-hidden="true">
+              <span className="info-card__icon">↗︎</span>
+              <span className="info-card__number">02</span>
+            </div>
+            <h3>Bring your group</h3>
+            <p>Share one link so everyone can use and update the same game configurations - no account required.</p>
           </article>
           <article className="info-card">
-            <span className="info-card__number" aria-hidden="true">03</span>
-            <h3>Play on your device</h3>
-            <p>Add player names and make assignments locally. Names and named results are never sent to the shared library.</p>
+            <div className="info-card__meta" aria-hidden="true">
+              <span className="info-card__icon">⚄</span>
+              <span className="info-card__number">03</span>
+            </div>
+            <h3>Randomize assignments</h3>
+            <p>Choose who's playing, then fairly deal out one or more sets of assignments in a few taps.</p>
           </article>
         </div>
       </section>
@@ -135,54 +144,30 @@ export function HomePage() {
       <section className="section privacy-section" aria-labelledby="privacy-heading">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Clear by design</p>
-            <h2 id="privacy-heading">Privacy and storage</h2>
+            <p className="eyebrow">Privacy, briefly</p>
+            <h2 id="privacy-heading">Game setup is shared. Player details stay local.</h2>
           </div>
         </div>
         <p className="privacy-intro">
-          Game Night separates shared game information from personal game-night information. Here is where each kind of data lives.
+          Game Night stores group and game configurations so everyone with the link can use them. Player names and randomized results are not sent to the shared library.
         </p>
-        <div className="storage-grid">
-          <article className="storage-card">
-            <p className="storage-card__location">Shared / Cloudflare D1</p>
-            <h3>Game-library configuration</h3>
-            <ul>
-              <li>Group and game names</li>
-              <li>Assignment sets, options, quantities, and banned pairs</li>
-              <li>Revision and timestamp information used to prevent stale edits</li>
-            </ul>
-            <p>The secret part of a group link is stored server-side only as a SHA-256 hash.</p>
-          </article>
-          <article className="storage-card">
-            <p className="storage-card__location">Private / This browser</p>
-            <h3>Device-local information</h3>
-            <ul>
-              <li>Remembered group links</li>
-              <li>Each group's player roster</li>
-              <li>Cached copies of groups previously opened successfully</li>
-            </ul>
-            <p>This information is stored in your browser's IndexedDB and is not sent with shared game updates.</p>
-          </article>
-          <article className="storage-card">
-            <p className="storage-card__location">Temporary / This session</p>
-            <h3>Current setup</h3>
-            <ul>
-              <li>Selected players</li>
-              <li>Temporary option exclusions</li>
-              <li>Current assignment results</li>
-            </ul>
-            <p>These exist only while you use the current page and disappear when you leave or refresh it.</p>
-          </article>
-        </div>
-        <aside className="privacy-callout" role="note">
-          <div>
-            <p className="eyebrow">Treat the link like a key</p>
-            <h3>Anyone with a group link can view and edit that group.</h3>
+        <details className="privacy-details">
+          <summary>See exactly what Game Night stores</summary>
+          <div className="privacy-details__content">
+            <article className="privacy-detail">
+              <p className="storage-card__location">Shared with the group</p>
+              <h3>Game configuration</h3>
+              <p>Group and game names, assignment options, quantities, restrictions, revisions, and timestamps are stored in Cloudflare D1.</p>
+              <p>Anyone with the group link can view and edit this information. The secret part of the link is stored server-side only as a SHA-256 hash.</p>
+            </article>
+            <article className="privacy-detail">
+              <p className="storage-card__location">Kept on this device</p>
+              <h3>Players and current results</h3>
+              <p>Remembered links, cached groups, and each group's player roster stay in this browser. Current selections and assignment results last only for the current setup.</p>
+              <p>There are no accounts, product analytics, public group search, or server-side player and assignment history.</p>
+            </article>
           </div>
-          <p>
-            Game Night v1 has no accounts, owner recovery, group search, product analytics, or server-side player and assignment history.
-          </p>
-        </aside>
+        </details>
       </section>
 
       <section className="section game-tools-teaser">

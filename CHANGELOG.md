@@ -10,6 +10,9 @@ completed user-facing and repository-management changes remain under
 
 ### Changed
 
+- Refocused the public homepage on board-game role randomization, simplified
+  the workflow language, and reduced privacy storage details to an expandable
+  supporting section.
 - Updated the public product name, PWA metadata, sharing language, examples,
   backup-facing text, and documentation from BG Assistant to Game Night while
   preserving compatibility-sensitive internal identifiers.

@@ -29,19 +29,16 @@ function renderHome() {
 }
 
 describe("home page flows", () => {
-  it("explains the workflow and all three storage boundaries", () => {
+  it("leads with randomization and keeps privacy details available", () => {
     renderHome();
 
+    expect(screen.getByRole("heading", { name: /Randomize every role/ })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "How it works" })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Privacy and storage" })).toBeTruthy();
-    expect(screen.getByText("Shared / Cloudflare D1")).toBeTruthy();
-    expect(screen.getByText("Private / This browser")).toBeTruthy();
-    expect(screen.getByText("Temporary / This session")).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Game setup is shared. Player details stay local." })).toBeTruthy();
+    expect(screen.getByText("Shared with the group")).toBeTruthy();
+    expect(screen.getByText("Kept on this device")).toBeTruthy();
     expect(
-      screen.getByText("Anyone with a group link can view and edit that group.")
-    ).toBeTruthy();
-    expect(
-      screen.getByText(/secret part of a group link is stored server-side only as a SHA-256 hash/)
+      screen.getByText(/secret part of the link is stored server-side only as a SHA-256 hash/)
     ).toBeTruthy();
   });
 
