@@ -19,7 +19,7 @@ export function HomePage() {
     setError("");
     if (mode === "join") {
       const match = value.trim().match(/\/g\/([A-Za-z0-9_-]{43})(?:\/|$)/);
-      if (!match) return setError("Paste a valid BG Assistant group link.");
+      if (!match) return setError("Paste a valid Game Night group link.");
       navigate(`/g/${match[1]}`);
       return;
     }
@@ -65,14 +65,14 @@ export function HomePage() {
             <h2>{mode === "create" ? "Name your group" : "Paste the group link"}</h2>
           </div>
           <label>
-            <span>{mode === "create" ? "Group name" : "BG Assistant link"}</span>
+            <span>{mode === "create" ? "Group name" : "Game Night link"}</span>
             <input
               autoFocus
               required
               maxLength={mode === "create" ? 80 : 500}
               value={value}
               onChange={(event) => setValue(event.target.value)}
-              placeholder={mode === "create" ? "Friday Game Night" : "https://bg.arjunmakes.games/g/…"}
+              placeholder={mode === "create" ? "Friday Game Night" : "https://gamenight.ludicmethods.com/g/…"}
             />
           </label>
           {error && <p className="error" role="alert">{error}</p>}
@@ -140,7 +140,7 @@ export function HomePage() {
           </div>
         </div>
         <p className="privacy-intro">
-          BG Assistant separates shared game information from personal game-night information. Here is where each kind of data lives.
+          Game Night separates shared game information from personal game-night information. Here is where each kind of data lives.
         </p>
         <div className="storage-grid">
           <article className="storage-card">
@@ -180,7 +180,7 @@ export function HomePage() {
             <h3>Anyone with a group link can view and edit that group.</h3>
           </div>
           <p>
-            BG Assistant v1 has no accounts, owner recovery, group search, product analytics, or server-side player and assignment history.
+            Game Night v1 has no accounts, owner recovery, group search, product analytics, or server-side player and assignment history.
           </p>
         </aside>
       </section>
@@ -193,4 +193,3 @@ export function HomePage() {
     </Shell>
   );
 }
-

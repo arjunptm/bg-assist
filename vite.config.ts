@@ -12,8 +12,8 @@ export default defineConfig({
       includeAssets: ["pwa-192x192.png", "pwa-512x512.png"],
       manifest: {
         id: "/",
-        name: "BG Assistant",
-        short_name: "BG Assistant",
+        name: "Game Night",
+        short_name: "Game Night",
         description: "Fast, private board-game setup tools.",
         theme_color: "#173f35",
         background_color: "#f4efe4",

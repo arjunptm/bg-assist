@@ -70,6 +70,10 @@ describe("group sharing fallbacks", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Share group" }));
     await waitFor(() => expect(share).toHaveBeenCalled());
+    expect(share).toHaveBeenCalledWith({
+      title: "Friday Game Night · Game Night",
+      url: window.location.href
+    });
 
     expect(screen.queryByRole("dialog")).toBeNull();
   });

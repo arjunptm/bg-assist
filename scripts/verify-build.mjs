@@ -10,8 +10,8 @@ const manifest = JSON.parse(
 
 for (const [key, expected] of Object.entries({
   id: "/",
-  name: "BG Assistant",
-  short_name: "BG Assistant",
+  name: "Game Night",
+  short_name: "Game Night",
   start_url: "/",
   scope: "/",
   display: "standalone"

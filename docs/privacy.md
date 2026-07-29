@@ -1,6 +1,6 @@
 # Privacy and data storage
 
-BG Assistant separates shared, non-personal game configuration from private
+Game Night separates shared, non-personal game configuration from private
 game-night information. Player names and named assignment results never enter
 the Worker API or Cloudflare D1.
 
@@ -45,7 +45,7 @@ rejected rather than silently discarded.
 
 ## What v1 does not collect
 
-BG Assistant v1 has:
+Game Night v1 has:
 
 - No user accounts or owner profiles
 - No group-search directory
@@ -59,7 +59,7 @@ Assistant does not place player names or named assignment results in requests,
 logs, analytics, or shared configuration.
 
 Persisted Workers observability is disabled in `wrangler.jsonc` because
-Cloudflare invocation logs include full request URLs and BG Assistant group
+Cloudflare invocation logs include full request URLs and Game Night group
 capabilities appear in API paths. Live-tail debugging also exposes URLs and
 must use disposable group links only.
 

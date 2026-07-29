@@ -1,6 +1,6 @@
 # Development Workflow
 
-BG Assistant follows the workspace-level repository maintenance standard. This
+The Game Night repository follows the workspace-level maintenance standard. This
 document defines the concrete branch, local review, and pull-request process
 for this repository.
 

@@ -1,6 +1,6 @@
 # Architecture
 
-BG Assistant is a mobile-first React PWA backed by a capability-scoped
+Game Night is a mobile-first React PWA backed by a capability-scoped
 Cloudflare Worker and D1 database. Its most important architectural rule is
 that player names and named assignment results never leave the browser.
 

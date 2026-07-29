@@ -57,7 +57,7 @@ function renderBackup(stale = false) {
 }
 
 function chooseBackup(value: unknown, name = "games.json") {
-  const input = screen.getByLabelText("Choose a BG Assistant configuration backup");
+  const input = screen.getByLabelText("Choose a Game Night configuration backup");
   fireEvent.change(input, {
     target: {
       files: [{

@@ -149,7 +149,7 @@ export function parseConfigurationBackup(text: string): ConfigurationBackup {
     const version = typeof value === "object" && value && "version" in value ? value.version : undefined;
     if (version !== CONFIGURATION_BACKUP_VERSION) {
       throw new ConfigurationBackupError(
-        `This backup version is not supported. BG Assistant currently imports version ${CONFIGURATION_BACKUP_VERSION}.`
+        `This backup version is not supported. Game Night currently imports version ${CONFIGURATION_BACKUP_VERSION}.`
       );
     }
     throw new ConfigurationBackupError(
