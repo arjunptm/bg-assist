@@ -47,6 +47,12 @@ const workerConfig = JSON.parse(
 if (workerConfig.assets?.not_found_handling !== "single-page-application") {
   throw new Error("Built Worker is missing SPA navigation fallback.");
 }
+if (
+  JSON.stringify(workerConfig.assets?.run_worker_first) !==
+  JSON.stringify(["/api/*"])
+) {
+  throw new Error("Built Worker must route only /api/* through the Worker first.");
+}
 if (!workerConfig.d1_databases?.some((database) => database.binding === "DB")) {
   throw new Error("Built Worker is missing the DB binding.");
 }
@@ -54,4 +60,4 @@ if (workerConfig.observability?.enabled !== false) {
   throw new Error("Persisted Worker observability must remain disabled for capability privacy.");
 }
 
-console.log("Verified PWA metadata, SPA fallback, D1 binding, and logging privacy.");
+console.log("Verified PWA metadata, SPA/API routing, D1 binding, and logging privacy.");

@@ -16,6 +16,8 @@ completed user-facing and repository-management changes remain under
 
 ### Fixed
 
+- Routed `/api/*` through the Worker before static assets while preserving the
+  SPA shell for browser navigation and deep links.
 - Disabled persisted Worker invocation logs so capability tokens in API paths
   are not retained as application observability data.
 - Replaced the native Clear players prompt with an accessible inline confirmation.
