@@ -44,6 +44,14 @@ await access(resolve(clientDirectory, "sw.js"));
 const workerConfig = JSON.parse(
   await readFile(resolve(workerDirectory, "wrangler.json"), "utf8")
 );
+const production = process.env.CLOUDFLARE_ENV === "production";
+const expectedWorkerName = production ? "bg-assistant" : "bg-assistant-development";
+const expectedDatabaseName = production
+  ? "bg-assistant-production"
+  : "bg-assistant-development";
+if (workerConfig.name !== expectedWorkerName) {
+  throw new Error(`Built Worker name must be ${expectedWorkerName}.`);
+}
 if (workerConfig.assets?.not_found_handling !== "single-page-application") {
   throw new Error("Built Worker is missing SPA navigation fallback.");
 }
@@ -53,11 +61,20 @@ if (
 ) {
   throw new Error("Built Worker must route only /api/* through the Worker first.");
 }
-if (!workerConfig.d1_databases?.some((database) => database.binding === "DB")) {
+const database = workerConfig.d1_databases?.find((candidate) => candidate.binding === "DB");
+if (!database) {
   throw new Error("Built Worker is missing the DB binding.");
+}
+if (database.database_name !== expectedDatabaseName) {
+  throw new Error(`Built Worker DB must be ${expectedDatabaseName}.`);
+}
+if (database.database_id?.startsWith("replace-after-creating")) {
+  throw new Error("Built Worker still contains a placeholder D1 database ID.");
 }
 if (workerConfig.observability?.enabled !== false) {
   throw new Error("Persisted Worker observability must remain disabled for capability privacy.");
 }
 
-console.log("Verified PWA metadata, SPA/API routing, D1 binding, and logging privacy.");
+console.log(
+  `Verified ${production ? "production" : "development"} PWA metadata, SPA/API routing, D1 binding, and logging privacy.`
+);

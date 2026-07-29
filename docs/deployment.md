@@ -1,8 +1,7 @@
-# Development deployment runbook
+# Cloudflare deployment runbook
 
-This runbook creates a temporary HTTPS development deployment on
-`workers.dev`. It does not attach `gamenight.ludicmethods.com`, change DNS, or
-create a production database.
+This runbook covers the isolated development and production Cloudflare
+environments. It does not attach `gamenight.ludicmethods.com` or change DNS.
 
 For the complete domain-purchase-through-production sequence, follow
 [`gamenight-launch-checklist.md`](gamenight-launch-checklist.md).
@@ -12,11 +11,10 @@ Merging code must never apply database migrations automatically.
 
 ## What is already prepared
 
-- The checked-in Worker name and D1 database name are
-  `bg-assistant-development`.
-- `wrangler.jsonc` contains a visible placeholder for the development D1 ID.
-  A D1 ID is resource configuration and may be committed; account credentials
-  and API tokens must not be committed.
+- The default Worker and D1 database are both `bg-assistant-development`.
+- The named `production` environment uses Worker `bg-assistant` and D1 database
+  `bg-assistant-production`. Their D1 IDs are public resource configuration and
+  may be committed; account credentials and API tokens must not be committed.
 - Persisted Workers observability is disabled because invocation logs include
   the request URL, and Game Night capability tokens appear in API paths.
 - `pnpm run build` verifies PWA metadata, icons, service-worker output, SPA
@@ -75,6 +73,28 @@ Expected migration files are:
 
 Never add `db:remote:migrate` to the deploy command. Review and run it only when
 a checked-in feature introduces a D1 migration.
+
+## Production environment
+
+The ordinary commands above remain development-only. Production selection is
+explicit and uses Cloudflare's named `production` environment:
+
+```bash
+pnpm run build:production
+pnpm run db:production:list
+pnpm run db:production:migrate
+pnpm run db:production:list
+pnpm run deploy:production
+```
+
+`build:production` and `deploy:production` set `CLOUDFLARE_ENV=production` for
+the Cloudflare Vite plugin through a cross-platform wrapper. Do not set that
+variable globally or add it to a committed environment file. A subsequent
+ordinary `pnpm run build` or `pnpm run deploy` must still target development.
+
+As with development, the production migration command is never part of the
+deploy command. List pending migrations, review them, apply them deliberately,
+and confirm the list is empty before deploying code that requires the schema.
 
 ## First manual development deployment
 
