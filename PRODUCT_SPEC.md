@@ -88,5 +88,6 @@ and future Game Tools.
 
 React, TypeScript, Vite, Cloudflare Workers Static Assets, a Hono Worker API,
 Cloudflare D1, and Cloudflare's Vite integration. GitHub and Cloudflare setup,
-DNS migration, production deployment, and the `bg.arjunmakes.games` domain are
+domain registration, production deployment, and the
+`gamenight.ludicmethods.com` domain are
 deliberately deferred until the local app is reviewed.
