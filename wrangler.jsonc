@@ -10,7 +10,7 @@
     {
       "binding": "DB",
       "database_name": "bg-assistant-development",
-      "database_id": "replace-after-creating-d1",
+      "database_id": "a1c5866a-0653-49d4-8a76-cb33a5949630",
       "migrations_dir": "migrations"
     }
   ],
