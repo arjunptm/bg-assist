@@ -52,6 +52,20 @@ const expectedDatabaseName = production
 if (workerConfig.name !== expectedWorkerName) {
   throw new Error(`Built Worker name must be ${expectedWorkerName}.`);
 }
+if (workerConfig.workers_dev !== !production) {
+  throw new Error(
+    production
+      ? "Production must disable its workers.dev route."
+      : "Development must keep its workers.dev route enabled."
+  );
+}
+if (workerConfig.preview_urls !== !production) {
+  throw new Error(
+    production
+      ? "Production must disable version preview URLs."
+      : "Development must keep PR preview URLs enabled."
+  );
+}
 if (workerConfig.assets?.not_found_handling !== "single-page-application") {
   throw new Error("Built Worker is missing SPA navigation fallback.");
 }

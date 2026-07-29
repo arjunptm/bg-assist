@@ -34,6 +34,8 @@ completed user-facing and repository-management changes remain under
 
 - Added an explicit production Cloudflare environment and commands that keep
   production Worker and D1 operations separate from development.
+- Disabled alternate production `workers.dev` and version preview URLs while
+  retaining development and pull-request preview access.
 - Added the MIT License for the public source repository.
 - Added a reviewed v1 schema freeze, populated migration-upgrade coverage,
   generated PWA/deployment artifact verification, and a development deployment
