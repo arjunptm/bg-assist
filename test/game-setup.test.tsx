@@ -29,7 +29,7 @@ vi.mock("../src/hooks/useGroup", () => {
                 id: "copper",
                 name: "Dr. Copper",
                 description: "Look at another character's card.",
-                color: "blue",
+                color: "#3677B3",
                 quantity: 1
               }
             ]
@@ -76,7 +76,7 @@ describe("assignment option descriptions", () => {
     const resultCard = (await screen.findByRole("heading", { name: "Arjun" })).closest("article");
     expect(resultCard).toBeTruthy();
     expect(within(resultCard!).getByText("Dr. Copper")).toBeTruthy();
-    expect(within(resultCard!).getByText(/Color: Blue/)).toBeTruthy();
+    expect(within(resultCard!).getByText(/Color: #3677B3/)).toBeTruthy();
     expect(within(resultCard!).getByText("Look at another character's card.")).toBeTruthy();
   });
 });

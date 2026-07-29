@@ -1,23 +1,13 @@
-export const assignmentOptionColors = [
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "blue",
-  "purple",
-  "pink",
-  "gray"
-] as const;
+import { z } from "zod";
 
-export type AssignmentOptionColor = (typeof assignmentOptionColors)[number];
+export const assignmentOptionColorSchema = z
+  .string()
+  .regex(/^#[0-9A-F]{6}$/, "Color must use uppercase #RRGGBB format");
 
-export const assignmentOptionColorLabels: Record<AssignmentOptionColor, string> = {
-  red: "Red",
-  orange: "Orange",
-  yellow: "Yellow",
-  green: "Green",
-  blue: "Blue",
-  purple: "Purple",
-  pink: "Pink",
-  gray: "Gray"
-};
+export type AssignmentOptionColor = z.infer<typeof assignmentOptionColorSchema>;
+
+export const defaultAssignmentOptionColor: AssignmentOptionColor = "#39845B";
+
+export function normalizeAssignmentOptionColor(value: string): AssignmentOptionColor {
+  return value.toUpperCase();
+}

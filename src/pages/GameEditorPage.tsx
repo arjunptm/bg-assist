@@ -1,15 +1,11 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { OptionColorPicker } from "../components/OptionColorPicker";
 import { LoadingCard, Shell } from "../components/Shell";
 import { useGroup } from "../hooks/useGroup";
 import { saveGame } from "../lib/api";
 import { createUuid } from "../lib/uuid";
 import type { AssignmentSet, GameDraft } from "../shared/models";
-import {
-  assignmentOptionColorLabels,
-  assignmentOptionColors,
-  type AssignmentOptionColor
-} from "../shared/option-colors";
 
 function freshSet(): AssignmentSet {
   return {
@@ -137,39 +133,15 @@ export function GameEditorPage() {
                     <span>Description <span className="muted">(optional)</span></span>
                     <textarea maxLength={500} rows={2} value={option.description ?? ""} onChange={(event) => updateSet(setIndex, { options: set.options.map((item, index) => index === optionIndex ? { ...item, description: event.target.value } : item) })} placeholder="Powers, abilities, or setup notes" />
                   </label>
-                  <label className="option-color">
-                    <span>Color <span className="muted">(optional)</span></span>
-                    <span className="option-color__control">
-                      {option.color && (
-                        <span
-                          className="option-color-swatch"
-                          data-option-color={option.color}
-                          aria-hidden="true"
-                        />
-                      )}
-                      <select
-                        aria-label={`Color for ${option.name || `option ${optionIndex + 1}`}`}
-                        value={option.color ?? ""}
-                        onChange={(event) => {
-                          const color = event.target.value as AssignmentOptionColor | "";
-                          updateSet(setIndex, {
-                            options: set.options.map((item, index) =>
-                              index === optionIndex
-                                ? { ...item, color: color || undefined }
-                                : item
-                            )
-                          });
-                        }}
-                      >
-                        <option value="">Default</option>
-                        {assignmentOptionColors.map((color) => (
-                          <option key={color} value={color}>
-                            {assignmentOptionColorLabels[color]}
-                          </option>
-                        ))}
-                      </select>
-                    </span>
-                  </label>
+                  <OptionColorPicker
+                    label={option.name || `option ${optionIndex + 1}`}
+                    value={option.color}
+                    onChange={(color) => updateSet(setIndex, {
+                      options: set.options.map((item, index) =>
+                        index === optionIndex ? { ...item, color } : item
+                      )
+                    })}
+                  />
                 </div>
               ))}
             </div>

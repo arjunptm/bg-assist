@@ -208,8 +208,8 @@ pnpm run db:remote:list
 ```
 
 - [ ] The final command reports no unapplied migrations.
-- [ ] The ledger lists `0001_initial.sql`, `0002_option_descriptions.sql`, and
-      `0003_option_colors.sql`.
+- [ ] The ledger lists `0001_initial.sql`, `0002_option_descriptions.sql`,
+      `0003_option_colors.sql`, and `0004_hex_option_colors.sql`.
 - [ ] The final schema includes option descriptions and colors.
 
 Never add migration commands to ordinary deployment. Code deployments and

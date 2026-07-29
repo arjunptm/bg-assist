@@ -36,7 +36,8 @@ beforeAll(async () => {
   for (const migration of [
     "0001_initial.sql",
     "0002_option_descriptions.sql",
-    "0003_option_colors.sql"
+    "0003_option_colors.sql",
+    "0004_hex_option_colors.sql"
   ]) {
     const sql = await readFile(resolve("migrations", migration), "utf8");
     await database.exec(d1ExecScript(sql));
@@ -97,7 +98,7 @@ describe("Worker and D1 integration", () => {
         {
           id: crypto.randomUUID(),
           name: "Factions",
-          options: [{ id: factionId, name: "Rusviet", description: "Riverwalk", color: "red", quantity: 1 }]
+          options: [{ id: factionId, name: "Rusviet", description: "Riverwalk", color: "#C63D4F", quantity: 1 }]
         },
         {
           id: crypto.randomUUID(),
@@ -121,7 +122,7 @@ describe("Worker and D1 integration", () => {
     expect(game.assignmentSets[0].options[0]).toMatchObject({
       name: "Rusviet",
       description: "Riverwalk",
-      color: "red"
+      color: "#C63D4F"
     });
 
     const staleResponse = await request(`/api/groups/${capability}/games/${game.id}`, {

@@ -10,6 +10,10 @@ completed user-facing and repository-management changes remain under
 
 ### Changed
 
+- Replaced the curated assignment-option color dropdown with an arbitrary
+  themed in-app picker and canonical uppercase hex values across persistence,
+  backups,
+  cached snapshots, setup, and assignment results.
 - Refocused the public homepage on board-game role randomization, simplified
   the workflow language, and reduced privacy storage details to an expandable
   supporting section.

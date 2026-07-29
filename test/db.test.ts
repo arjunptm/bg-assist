@@ -43,7 +43,7 @@ describe("game aggregate persistence", () => {
               id: crypto.randomUUID(),
               name: "Dr. Copper",
               description: "Look at another character's card.",
-              color: "blue",
+              color: "#3677B3",
               quantity: 1
             },
             {
@@ -63,7 +63,7 @@ describe("game aggregate persistence", () => {
     expect(outcome).toBe("created");
     expect(optionInserts).toHaveLength(2);
     expect(optionInserts[0]!.args[3]).toBe("Look at another character's card.");
-    expect(optionInserts[0]!.args[4]).toBe("blue");
+    expect(optionInserts[0]!.args[4]).toBe("#3677B3");
     expect(optionInserts[1]!.args[3]).toBe("");
     expect(optionInserts[1]!.args[4]).toBeNull();
   });

@@ -22,7 +22,7 @@ const game: Game = {
           id: "30000000-0000-4000-8000-000000000000",
           name: "Rusviet",
           description: "Northern faction",
-          color: "red",
+          color: "#C63D4F",
           quantity: 1
         }
       ]
@@ -67,7 +67,7 @@ describe("portable configuration backups", () => {
     expect(draft?.assignmentSets[0]?.options[0]).toMatchObject({
       name: "Rusviet",
       description: "Northern faction",
-      color: "red",
+      color: "#C63D4F",
       quantity: 1
     });
     expect(draft?.assignmentSets[0]?.id).not.toBe(game.assignmentSets[0]?.id);

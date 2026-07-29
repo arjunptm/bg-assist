@@ -10,7 +10,7 @@ const validGame: GameDraft = {
     {
       id: crypto.randomUUID(),
       name: "Factions",
-      options: [{ id: optionA, name: "Rusviet", description: "  Move between villages.  ", color: "red", quantity: 1 }]
+      options: [{ id: optionA, name: "Rusviet", description: "  Move between villages.  ", color: "#C63D4F", quantity: 1 }]
     },
     {
       id: crypto.randomUUID(),
@@ -29,13 +29,15 @@ describe("shared API validation", () => {
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.assignmentSets[0]!.options[0]!.description).toBe("Move between villages.");
-      expect(result.data.assignmentSets[0]!.options[0]!.color).toBe("red");
+      expect(result.data.assignmentSets[0]!.options[0]!.color).toBe("#C63D4F");
       expect(assignmentOptionSchema.parse({ id: optionB, name: "Industrial", quantity: 1 }).description).toBe("");
     }
   });
 
-  it("allows only curated option colors", () => {
-    expect(assignmentOptionSchema.safeParse({ id: optionA, name: "Rusviet", color: "blue", quantity: 1 }).success).toBe(true);
+  it("allows only canonical uppercase hex option colors", () => {
+    expect(assignmentOptionSchema.safeParse({ id: optionA, name: "Rusviet", color: "#3677B3", quantity: 1 }).success).toBe(true);
+    expect(assignmentOptionSchema.safeParse({ id: optionA, name: "Rusviet", color: "#3677b3", quantity: 1 }).success).toBe(false);
+    expect(assignmentOptionSchema.safeParse({ id: optionA, name: "Rusviet", color: "blue", quantity: 1 }).success).toBe(false);
     expect(assignmentOptionSchema.safeParse({ id: optionA, name: "Rusviet", color: "#000; background: url(x)", quantity: 1 }).success).toBe(false);
   });
 
