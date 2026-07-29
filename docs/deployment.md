@@ -101,11 +101,20 @@ In Cloudflare:
 4. Enable builds for non-production branches so pull requests receive preview
    versions.
 5. Use repository root `/`.
-6. Use `pnpm install --frozen-lockfile` as the install command if Cloudflare
-   requests one.
-7. Use `pnpm run typecheck && pnpm test` as the build command.
-8. Use `pnpm run deploy` as the production deploy command.
-9. Use `pnpm run deploy:preview` as the non-production deploy command.
+6. Use `pnpm run typecheck && pnpm test` as the build command.
+7. Use `pnpm run deploy` as the production deploy command.
+8. Enable the advanced non-production branch deploy command and use
+   `pnpm run deploy:preview`.
+9. Leave **Create new token** selected. Cloudflare generates and manages the
+   Workers Builds token.
+10. Add the unencrypted build variable `PNPM_VERSION`, matching the
+    `packageManager` version in `package.json`.
+11. Leave build caching disabled for the first production and preview
+    verification. It may be enabled after both paths succeed.
+
+Workers Builds installs dependencies automatically; the current connection
+screen does not provide a separate install-command field. Do not add
+`SKIP_DEPENDENCY_INSTALL`.
 
 The Worker name in Cloudflare must match `name` in `wrangler.jsonc`. A push to
 `main` should create and promote a deployment. A pull-request branch should run
