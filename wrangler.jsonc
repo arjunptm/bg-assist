@@ -17,5 +17,18 @@
   ],
   "observability": {
     "enabled": false
+  },
+  "env": {
+    "production": {
+      "name": "bg-assistant",
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "bg-assistant-production",
+          "database_id": "29a1b88f-b180-4bd6-ad40-e0225582e6a2",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
   }
 }

@@ -425,13 +425,25 @@ Before running production commands, return to Codex. Codex will add and review
 an explicit production configuration so development scripts cannot target
 production.
 
-- [ ] Add explicit production configuration and commands.
-- [ ] Create `bg-assistant-production`.
-- [ ] Put its resource ID only in the production binding.
-- [ ] Verify development commands still target development only.
-- [ ] Run typecheck, tests, and build.
-- [ ] List and deliberately apply production migrations.
-- [ ] Confirm no migrations remain unapplied.
+Production operations use explicit commands:
+
+```bash
+pnpm run build:production
+pnpm run db:production:list
+pnpm run db:production:migrate
+pnpm run deploy:production
+```
+
+Ordinary `pnpm run build` and `pnpm run deploy` remain development-only. The
+production deploy command does not apply D1 migrations.
+
+- [x] Add explicit production configuration and commands.
+- [x] Create `bg-assistant-production`.
+- [x] Put its resource ID only in the production binding.
+- [x] Verify development commands still target development only.
+- [x] Run typecheck, tests, and build.
+- [x] List and deliberately apply production migrations.
+- [x] Confirm no migrations remain unapplied.
 - [ ] Deploy the production Worker.
 - [ ] Test its temporary production `workers.dev` address.
 
