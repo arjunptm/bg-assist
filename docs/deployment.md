@@ -15,6 +15,9 @@ Merging code must never apply database migrations automatically.
 - The named `production` environment uses Worker `bg-assistant` and D1 database
   `bg-assistant-production`. Their D1 IDs are public resource configuration and
   may be committed; account credentials and API tokens must not be committed.
+- Development keeps its public `workers.dev` and version preview URLs for
+  disposable device testing and pull-request review. Production disables both
+  URL types and is reachable only through its custom domain.
 - Persisted Workers observability is disabled because invocation logs include
   the request URL, and Game Night capability tokens appear in API paths.
 - `pnpm run build` verifies PWA metadata, icons, service-worker output, SPA
@@ -91,6 +94,12 @@ pnpm run deploy:production
 the Cloudflare Vite plugin through a cross-platform wrapper. Do not set that
 variable globally or add it to a committed environment file. A subsequent
 ordinary `pnpm run build` or `pnpm run deploy` must still target development.
+
+Production sets `workers_dev` and `preview_urls` to `false` in source control.
+Do not rely on dashboard-only toggles: a later Wrangler deployment can restore
+settings that are not represented in `wrangler.jsonc`. Development explicitly
+keeps both settings enabled so GitHub pull requests continue to receive usable
+Cloudflare preview links.
 
 As with development, the production migration command is never part of the
 deploy command. List pending migrations, review them, apply them deliberately,
