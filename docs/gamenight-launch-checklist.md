@@ -311,32 +311,33 @@ After the manual deployment works:
 5. Set the production branch to `main`.
 6. Enable non-production branch builds for pull-request previews.
 7. Use repository root `/`.
-8. Use this install command if requested:
-
-   ```bash
-   pnpm install --frozen-lockfile
-   ```
-
-9. Use this build command:
+8. Use this build command:
 
    ```bash
    pnpm run typecheck && pnpm test
    ```
 
-10. Use this production deploy command:
+9. Use this production deploy command:
 
-    ```bash
-    pnpm run deploy
-    ```
+   ```bash
+   pnpm run deploy
+   ```
 
-11. Use this preview deploy command:
+10. Enable the advanced non-production branch deploy command and use:
 
     ```bash
     pnpm run deploy:preview
     ```
 
-12. Test a harmless pull request and confirm it receives a preview build.
-13. Merge it and confirm `main` deploys successfully.
+11. Leave **Create new token** selected so Cloudflare creates and manages the
+    Workers Builds token.
+12. Add an unencrypted `PNPM_VERSION` build variable matching the
+    `packageManager` version in `package.json`.
+13. Leave build caching disabled for the initial production and preview
+    verification. Workers Builds installs dependencies automatically; do not
+    add `SKIP_DEPENDENCY_INSTALL`.
+14. Test a harmless pull request and confirm it receives a preview build.
+15. Merge it and confirm `main` deploys successfully.
 
 Merged code should now deploy automatically to development. D1 migrations must
 still be reviewed and applied manually.
