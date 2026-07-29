@@ -15,6 +15,26 @@ Use this document for the complete account-to-production sequence. Use
 [`deployment.md`](deployment.md) for detailed development Worker and D1
 commands.
 
+## How the handoffs work
+
+This is a collaborative checklist. Each major handoff identifies:
+
+- **What you accomplished:** the state that should now exist.
+- **What Codex does next:** the repository or Cloudflare work Codex will perform or guide.
+- **What Codex is checking:** why those operations are necessary and what could go wrong.
+- **What you will see afterward:** the concrete result that makes it safe to continue.
+
+| Arjun-led work | Codex-led work |
+| --- | --- |
+| Account ownership, payment, authentication approval, and recovery codes | Repository configuration, implementation, verification, branches, pull requests, and documentation |
+| Judgment on product names and release readiness | D1 creation/migration commands and Worker deployments after authorization |
+| Testing on physical Android and iPhone devices | Automated tests, deployment inspection, and diagnosis of reported failures |
+| Cloudflare dashboard approvals that require the account owner | Explaining each resource and checking that development and production remain isolated |
+
+Codex will describe a proposed operation before running it. Commands that create
+or change Cloudflare resources will use the account confirmed by `wrangler
+whoami`; they will not run merely because this document lists them.
+
 ## Decisions already made
 
 - [x] Umbrella domain: `ludicmethods.com`
@@ -124,9 +144,27 @@ Wrangler should open a Cloudflare authorization page.
 This login does not deploy, create a database, or change DNS. It only authorizes
 this computer for later Cloudflare operations.
 
-**Pause here and tell Codex that the domain purchase and `wrangler whoami`
-check succeeded.** Codex can then handle the project-specific preparation with
-you.
+#### Handoff 1: return to Codex
+
+Tell Codex that the domain purchase and `wrangler whoami` check succeeded. You
+may share the displayed account name or ID, but never a token, password, payment
+detail, or recovery code.
+
+**What you accomplished:** You established domain ownership, secured the
+Cloudflare account, and authorized this computer. Nothing is deployed yet.
+
+**What Codex does next:** Codex will confirm the repository is clean, explain
+and run the D1 creation command, place its public resource ID in
+`wrangler.jsonc`, preserve that change through a branch and pull request, apply
+and verify the schema migrations, and deploy the development Worker.
+
+**What Codex is checking:** The D1 ID must belong to the intended account, the
+Worker must use only the development database, no credential may enter Git, and
+every migration must be recorded exactly once.
+
+**What you will see afterward:** A merged configuration change, a development
+D1 database named `bg-assistant-development`, and a disposable HTTPS
+`workers.dev` deployment.
 
 ---
 
@@ -135,7 +173,7 @@ you.
 The development environment provides a real HTTPS `workers.dev` address without
 putting the application at the public domain. Use disposable data at this stage.
 
-### 4. Create the development D1 database
+### 4. Create the development D1 database (Codex-led)
 
 From the repository root:
 
@@ -161,7 +199,7 @@ A D1 resource ID is public configuration and may be committed. Credentials,
 `.dev.vars`, `.env` files, private exports, and `.wrangler/` state must not be
 committed.
 
-### 5. Initialize the development database
+### 5. Initialize the development database (Codex-led)
 
 ```bash
 pnpm run db:remote:list
@@ -177,7 +215,7 @@ pnpm run db:remote:list
 Never add migration commands to ordinary deployment. Code deployments and
 schema migrations are deliberately independent.
 
-### 6. Perform the first manual development deployment
+### 6. Perform the first manual development deployment (Codex-led)
 
 ```bash
 pnpm run typecheck
@@ -191,7 +229,23 @@ pnpm run deploy
 - [ ] Open it on an iPhone if available.
 - [ ] Do not attach `gamenight.ludicmethods.com` yet.
 
-### 7. Test the development deployment
+#### Handoff 2: Codex returns the development site to Arjun
+
+**What Codex accomplished:** Codex verified TypeScript, tests, the production
+build, D1 schema, and Worker deployment, then supplied the HTTPS address.
+
+**What you do next:** Open it on the real devices and browsers used at game
+nights and complete Step 7.
+
+**Why this returns to you:** Automated tests cannot fully reproduce phone PWA
+installation, native share sheets, device viewports, or transitions between
+Wi-Fi and offline use.
+
+**What Codex needs back:** Report which items passed. For a failure, include the
+URL, device, OS/browser, tab-versus-installed-PWA state, and preceding action.
+Do not include a real retained capability link in a screenshot.
+
+### 7. Test the development deployment (Arjun-led)
 
 Use generic player names and disposable games.
 
@@ -229,7 +283,24 @@ If the intermittent JSON error occurs, record the complete URL, preceding tap,
 browser-tab versus installed-PWA state, phone model, OS, and browser. Add the
 evidence to GitHub issue #35.
 
-### 8. Connect Cloudflare Workers Builds to GitHub
+#### Handoff 3: return the device-test results to Codex
+
+**What you accomplished:** You established whether the HTTPS deployment works
+on physical devices and whether issue #35 occurs outside the local Vite server.
+
+**What Codex does next:** Codex will record the results, diagnose and fix
+release-blocking failures, rerun verification, then guide Step 8 and verify that
+preview and `main` builds behave differently.
+
+**What Codex is checking:** A pull-request preview must not replace the active
+development deployment, a merge must deploy the reviewed commit, and automatic
+deploy commands must never apply database migrations.
+
+**What you will see afterward:** Either a focused fix to test or a confirmed
+GitHub-to-Cloudflare pipeline with branch previews and automatic deployment from
+`main`.
+
+### 8. Connect Cloudflare Workers Builds to GitHub (shared)
 
 After the manual deployment works:
 
@@ -270,13 +341,28 @@ After the manual deployment works:
 Merged code should now deploy automatically to development. D1 migrations must
 still be reviewed and applied manually.
 
+#### Handoff 4: return the Builds result to Codex
+
+**What you accomplished:** You approved Cloudflare's GitHub integration and the
+dashboard settings needed for automated builds.
+
+**What Codex does next:** Codex will inspect GitHub checks and Cloudflare's
+deployment, verify the deployed commit, record any setting that differs from
+this guide, and begin the public-brand pass.
+
+**What Codex is checking:** Install, verification, production, and preview
+commands must target the intended Worker, and previews must remain isolated.
+
+**What you will see afterward:** A branding pull request whose preview says
+**Game Night** while retaining `bg-assistant` storage and resource compatibility.
+
 ---
 
 ## Part 3: prepare the public Game Night release
 
 Do not point the public hostname at the development Worker or database.
 
-### 9. Complete the public-brand pass
+### 9. Complete the public-brand pass (Codex-led, Arjun-reviewed)
 
 Create a focused issue and pull request that changes user-visible branding from
 BG Assistant to Game Night while retaining compatibility-sensitive internals.
@@ -297,7 +383,23 @@ identifier, repository, migration history, D1 binding, or internal TypeScript
 symbols. Renaming those is unnecessary for the public brand and could break
 stored data or backup compatibility.
 
-### 10. Finish production-readiness work
+#### Handoff 5: Codex returns the branded preview to Arjun
+
+**What Codex accomplished:** Codex changed the public identity in a focused
+branch, updated tests and documentation, and produced a preview without
+renaming compatibility-sensitive storage formats.
+
+**What you do next:** Review the preview on desktop and phone. Check the browser
+title, wordmark, installed-PWA label, share sheet, prompts, errors, and whether
+**Game Night** feels consistent.
+
+**Why this returns to you:** Tests can prove internal consistency, but brand
+tone and presentation are product judgments.
+
+**What Codex needs back:** Approve the branding or list exact wording and visual
+changes. Codex will then merge it and complete the readiness checks.
+
+### 10. Finish production-readiness work (shared)
 
 - [ ] Resolve or consciously disposition issue #35, the raw JSON 404.
 - [ ] Complete issue #4's mobile, accessibility, theme, PWA, and offline review.
@@ -308,7 +410,7 @@ stored data or backup compatibility.
       tokens occur in request paths.
 - [ ] Document the release rollback procedure.
 
-### 11. Create separate production resources
+### 11. Create separate production resources (Codex-led)
 
 Use:
 
@@ -318,8 +420,9 @@ Production D1:     bg-assistant-production
 Public hostname:   gamenight.ludicmethods.com
 ```
 
-Before running production commands, Codex should add and review an explicit
-production configuration so development scripts cannot target production.
+Before running production commands, return to Codex. Codex will add and review
+an explicit production configuration so development scripts cannot target
+production.
 
 - [ ] Add explicit production configuration and commands.
 - [ ] Create `bg-assistant-production`.
@@ -334,7 +437,24 @@ production configuration so development scripts cannot target production.
 Do not create long-lived real groups until the production schema and routing
 checks pass.
 
-### 12. Attach `gamenight.ludicmethods.com`
+#### Handoff 6: Codex returns a production candidate to Arjun
+
+**What Codex accomplished:** Codex created separate production configuration,
+Worker, and D1 resources; applied the reviewed schema; deployed the verified
+build; and tested its temporary production address.
+
+**What Codex is checking:** Development and production IDs must differ,
+production must have the complete migration ledger, and the public hostname
+must never point to the development Worker.
+
+**What you do next:** Open the temporary production address once. If it loads,
+perform the Custom Domain approval in Step 12.
+
+**What you will see afterward:** Cloudflare will issue TLS and make the same
+production Worker available at `https://gamenight.ludicmethods.com`. This does
+not copy or move the database.
+
+### 12. Attach `gamenight.ludicmethods.com` (Arjun-led, Codex-guided)
 
 Because the domain was purchased through Cloudflare, its zone should already be
 active in the same account. No Squarespace nameserver migration is needed.
@@ -361,7 +481,21 @@ Then:
 Do not manually create a CNAME first. The Worker Custom Domain flow creates the
 DNS record and certificate.
 
-### 13. Run the final production test
+#### Handoff 7: tell Codex when the custom domain is active
+
+**What you accomplished:** You approved the hostname-to-Worker association in
+the account-owner dashboard. Cloudflare created DNS and manages HTTPS.
+
+**What Codex does next:** Codex will inspect the public URL, certificate,
+routing behavior, and deployed version, then guide the final device test.
+
+**What Codex is checking:** The hostname must reach production, deep-link
+refreshes must return the app rather than JSON `not_found`, and the deployed
+version must match the intended commit.
+
+**What you will see afterward:** A verified public origin ready for Step 13.
+
+### 13. Run the final production test (shared)
 
 - [ ] Confirm valid HTTPS and load the home page.
 - [ ] Open and refresh a deep group link.
@@ -373,7 +507,22 @@ DNS record and certificate.
 - [ ] Confirm export/import and offline cached play.
 - [ ] Delete disposable data when it is no longer needed.
 
-### 14. Declare the first release
+#### Handoff 8: return the final test results to Codex
+
+**What you accomplished:** You confirmed the public origin works as a website
+and installed mobile app using disposable production data.
+
+**What Codex does next:** Codex will update the changelog and roadmap, record
+the release commit and migration state, close or update launch issues, and
+prepare a tag or GitHub release if the licensing decision calls for one.
+
+**What Codex is checking:** The repository, deployed Worker, migration ledger,
+documentation, and issue tracker must all describe the same released state.
+
+**What you will see afterward:** A documented first release with no temporary
+branch left and clear instructions for later code and schema updates.
+
+### 14. Declare the first release (Codex-led)
 
 - [ ] Update `CHANGELOG.md` with the production version and date.
 - [ ] Confirm GitHub `main` matches the deployed commit.
