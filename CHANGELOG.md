@@ -32,6 +32,7 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added the MIT License for the public source repository.
 - Added a reviewed v1 schema freeze, populated migration-upgrade coverage,
   generated PWA/deployment artifact verification, and a development deployment
   and rollback runbook.
