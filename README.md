@@ -78,6 +78,8 @@ change-specific verification, commit guidance, and pull-request process.
 - [Architecture](docs/architecture.md)
 - [Privacy and data storage](docs/privacy.md)
 - [Development workflow](docs/development.md)
+- [Development deployment runbook](docs/deployment.md)
+- [V1 shared schema freeze](docs/schema.md)
 - [Roadmap](docs/roadmap.md)
 - [Changelog](CHANGELOG.md)
 

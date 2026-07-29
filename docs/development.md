@@ -91,12 +91,16 @@ issue. Review the final PR diff and required CI checks before merging.
 
 GitHub Actions runs the same frozen install, typecheck, test, and build steps
 for pull requests and pushes to `main`. The required check is named
-`Verify source`.
+`Verify source`. The build also validates the generated PWA manifest, icons,
+service worker, SPA fallback, D1 binding, and disabled persisted invocation
+logging.
 
 Persistence and Worker integration tests use `fake-indexeddb` for browser-local
 state and Miniflare with an isolated D1 database for the real Hono/D1 boundary.
 The integration harness applies every checked-in migration before exercising
 capability access, strict payload validation, revisions, deletion, and restore.
+The migration-upgrade test separately starts with a populated initial schema and
+applies each later migration in order.
 
 ### Interrupted Windows test runs
 

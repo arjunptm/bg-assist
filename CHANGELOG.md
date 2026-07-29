@@ -10,6 +10,8 @@ completed user-facing and repository-management changes remain under
 
 ### Fixed
 
+- Disabled persisted Worker invocation logs so capability tokens in API paths
+  are not retained as application observability data.
 - Replaced the native Clear players prompt with an accessible inline confirmation.
 - Improved keyboard focus visibility and enlarged compact mobile action targets.
 - Made group sharing recover with a selectable group link, independent QR
@@ -22,6 +24,9 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added a reviewed v1 schema freeze, populated migration-upgrade coverage,
+  generated PWA/deployment artifact verification, and a development deployment
+  and rollback runbook.
 - Added versioned single-game and whole-library configuration backups with
   strict private-data rejection, relationship-safe import previews, and
   copy-only conflict handling.
