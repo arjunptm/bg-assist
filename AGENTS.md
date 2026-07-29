@@ -81,5 +81,8 @@
   exports, real capability links, or `.wrangler/` state.
 - `wrangler.jsonc` contains a placeholder D1 ID until the guided Cloudflare
   setup. Do not deploy it as-is.
-- Production target is `bg.arjunmakes.games`, but DNS and Cloudflare setup are
-  intentionally deferred.
+- Production target is `gamenight.ludicmethods.com`. The public product name is
+  **Game Night**, while compatibility-sensitive repository, package, Worker,
+  database, and export-format identifiers may remain `bg-assist` or
+  `bg-assistant`. Domain purchase and Cloudflare setup are intentionally
+  deferred until the guided launch.

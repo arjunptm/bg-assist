@@ -1,8 +1,11 @@
 # Development deployment runbook
 
 This runbook creates a temporary HTTPS development deployment on
-`workers.dev`. It does not attach `bg.arjunmakes.games`, change DNS, or create a
-production database.
+`workers.dev`. It does not attach `gamenight.ludicmethods.com`, change DNS, or
+create a production database.
+
+For the complete domain-purchase-through-production sequence, follow
+[`gamenight-launch-checklist.md`](gamenight-launch-checklist.md).
 
 Application deployment and D1 migration are separate deliberate actions.
 Merging code must never apply database migrations automatically.

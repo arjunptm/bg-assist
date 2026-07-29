@@ -27,12 +27,17 @@ active.
 
 ## Before the first production release
 
-- Inventory and migrate DNS records safely
-- Attach `bg.arjunmakes.games` only after development testing
+- Purchase and secure `ludicmethods.com` through Cloudflare Registrar
+- Complete the public-facing **Game Night** brand pass while retaining
+  compatibility-sensitive `bg-assistant` internals
+- Attach `gamenight.ludicmethods.com` only after development testing
 - Confirm rate limits, request validation, and privacy boundaries
 - Test installability and upgrades from the production origin
 - Document deployment, rollback, and release procedures
 - Decide repository visibility and licensing
+
+The ordered account, domain, development, and production procedure lives in
+[`gamenight-launch-checklist.md`](gamenight-launch-checklist.md).
 
 ## Later product work
 
