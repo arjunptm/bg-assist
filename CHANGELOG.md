@@ -22,6 +22,9 @@ completed user-facing and repository-management changes remain under
 
 ### Added
 
+- Added versioned single-game and whole-library configuration backups with
+  strict private-data rejection, relationship-safe import previews, and
+  copy-only conflict handling.
 - Expanded automated privacy and persistence coverage across IndexedDB,
   cached offline fallback, create/join/editor/setup flows, and Miniflare-backed
   Worker/D1 integration.

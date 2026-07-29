@@ -11,6 +11,7 @@ the Worker API or Cloudflare D1.
 | Cloudflare D1 | Group and game names, assignment sets and options, descriptions, optional colors, quantities, banned pairs, revisions, and timestamps | Makes one game library available to everyone with the group link |
 | Browser IndexedDB | Remembered capability links, the last-used group, per-group player rosters, and cached group snapshots | Remembers groups and players on one device and supports cached offline play |
 | Current page memory | Selected players, temporary option exclusions, and current assignment results | Supports the current setup without creating player or assignment history |
+| User-downloaded backup file | Explicitly exported game names and configuration only | Lets a user privately transfer or recover configuration without publishing it |
 
 Cached snapshots contain the same non-personal game configuration returned by
 the shared API. They do not contain player names or named results.
@@ -29,6 +30,18 @@ The in-app sharing fallback displays the complete capability link and generates
 its QR code locally. If native sharing or clipboard access is unavailable, the
 link remains selectable for manual copying; no third-party fallback service is
 used.
+
+## Configuration backups
+
+Configuration backup is deliberately separate from capability-link backup.
+Exported JSON files omit the group ID and capability link as well as all player,
+session, assignment, revision, timestamp, and cached-browser fields. Importing a
+file creates new copies of its games in a group the user can already access. It
+does not restore access to the original group.
+
+Imports are strictly validated in the browser before any shared writes begin.
+Files containing player-, session-, capability-, or cache-shaped fields are
+rejected rather than silently discarded.
 
 ## What v1 does not collect
 

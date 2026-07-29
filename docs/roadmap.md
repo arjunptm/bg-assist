@@ -13,6 +13,7 @@ active.
 - Multiple independently shuffled assignment sets
 - Quantities, temporary exclusions, and banned pairs
 - Offline cached play with online-only shared editing
+- Portable game-configuration backup and copy-based import
 - Local D1 migration, Worker API, tests, and production build
 
 ## Before the first development deployment
@@ -20,6 +21,7 @@ active.
 - Establish repository CI, templates, documentation, and review workflow
 - Expand automated coverage for IndexedDB, UI flows, and Worker/D1 integration
 - Complete a structured mobile, dark-mode, accessibility, and offline review
+- Verify portable configuration recovery before testers build real libraries
 - Create Cloudflare development resources and replace placeholder bindings
 - Connect GitHub builds and verify pull-request preview deployments
 
@@ -38,7 +40,7 @@ Only promote these items into implementation issues when they become active:
 
 - Private reveal mode
 - Whole-setup reshuffling where multiple constrained sets must change together
-- Improved recovery or access controls if capability links prove insufficient
+- Improved capability-link recovery or access controls if needed
 - Purpose-built Game Tools such as Catan and Carcassonne helpers
 - Tool-specific persisted preferences where a concrete tool needs them
 

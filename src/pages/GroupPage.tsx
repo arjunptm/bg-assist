@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { EmptyState, LoadingCard, Shell } from "../components/Shell";
 import { ShareGroup } from "../components/ShareGroup";
+import { ConfigurationBackup } from "../components/ConfigurationBackup";
 import { deleteGame, restoreGame } from "../lib/api";
 import { useGroup } from "../hooks/useGroup";
 import type { Game } from "../shared/models";
@@ -87,6 +88,13 @@ export function GroupPage() {
           </div>
         )}
       </section>
+      <ConfigurationBackup
+        capability={capability}
+        group={group}
+        games={games}
+        stale={stale}
+        update={update}
+      />
     </Shell>
   );
 }
