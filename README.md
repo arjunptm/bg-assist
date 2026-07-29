@@ -85,7 +85,11 @@ change-specific verification, commit guidance, and pull-request process.
 
 ## Deployment status
 
-The source is tracked at `github.com/arjunptm/bg-assist`. No Cloudflare
-production resource, custom domain, or DNS change has been created.
-`wrangler.jsonc` intentionally contains a placeholder D1 database ID.
-Cloudflare setup will be completed later as a separate, guided step.
+The source is tracked at `github.com/arjunptm/bg-assist`. The isolated
+development Worker, D1 database, preview builds, and automatic `main`
+deployments are configured. No Cloudflare production resource, custom domain,
+or production DNS change has been created.
+
+## License
+
+Game Night is available under the [MIT License](LICENSE).
