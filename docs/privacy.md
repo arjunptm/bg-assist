@@ -58,6 +58,11 @@ Cloudflare may provide infrastructure-level request observability, but BG
 Assistant does not place player names or named assignment results in requests,
 logs, analytics, or shared configuration.
 
+Persisted Workers observability is disabled in `wrangler.jsonc` because
+Cloudflare invocation logs include full request URLs and BG Assistant group
+capabilities appear in API paths. Live-tail debugging also exposes URLs and
+must use disposable group links only.
+
 ## Clearing local information
 
 Use **Clear players** inside a group to remove that group's locally remembered

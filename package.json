@@ -9,12 +9,16 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/verify-build.mjs",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:local": "wrangler d1 migrations apply bg-assistant --local",
-    "preview": "vite preview"
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "db:remote:list": "wrangler d1 migrations list bg-assistant-development --remote",
+    "db:remote:migrate": "wrangler d1 migrations apply bg-assistant-development --remote",
+    "preview": "vite preview",
+    "deploy": "pnpm run build && wrangler deploy",
+    "deploy:preview": "pnpm run build && wrangler versions upload"
   },
   "dependencies": {
     "hono": "^4.9.2",
